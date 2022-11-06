@@ -1,6 +1,6 @@
 package Filters;
 
-public class ColumnFilter implements Filter<String> {
+public class FormatValuesInCsvFormatFilter implements Filter<String> {
 
     public static String nodeID;
     public static String longitude;
@@ -33,7 +33,6 @@ public class ColumnFilter implements Filter<String> {
             checkCounter++;
         } else if(key.equals("amenity")) {
             amenity = value;
-            //vo shop da se stavi mapa i spored toa da se filtriraat ustanovite
             checkCounter++;
         }
 

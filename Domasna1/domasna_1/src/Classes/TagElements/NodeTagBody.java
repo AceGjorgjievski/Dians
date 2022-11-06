@@ -27,9 +27,7 @@ public class NodeTagBody {
         String localLat = parts[parts.length-4];
         String localLon = parts[parts.length-2];
 
-        instance.create(localID, localLon, localLat);
-
-        return localID + ", " + localLat +", " + localLon;
+        return localID + ", " + localLat + ", " + localLon;
     }
 
     private static String formatTagLine(String inputLine) {
@@ -41,12 +39,4 @@ public class NodeTagBody {
 
         return localKey + ", " + localValue;
     }
-
-    private NodeTagBody(String id, String longitude, String latitude) {
-    }
-
-    private NodeTagBody create(String id, String longitude, String latitude) {
-        return new NodeTagBody(id, longitude, latitude);
-    }
-
 }

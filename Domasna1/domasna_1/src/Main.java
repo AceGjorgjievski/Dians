@@ -15,7 +15,7 @@ import Pipe.Pipe;
 
 public class Main {
     private static final String OUTPUT_FILE_PATH = "Domasna1/output/output.txt";
-    private static final String ATTRIBUTE_NAMES = "ID, Name, Address, Amenity, Longitute, Latitude";
+    private static final String ATTRIBUTE_NAMES = "ID, Name, Address, Amenity, Latitude, Longitute";
 
     private static final List<BoundingBox> BOUNDING_BOXES_FOR_SKOPJE = new ArrayList<BoundingBox>(Arrays.asList(
         new BoundingBox(21.3822, 41.9890, 21.4290, 42.0092),
@@ -28,9 +28,10 @@ public class Main {
 
     private static final List<Filter<String>> FILTERS = new ArrayList<Filter<String>>(Arrays.asList(
         new GetSelfClosingNodesFilter(),
-        new TagFilter(),
-        new ColumnFilter(),
-        new TypeFilter()
+        new ExtractValuesFromXmlFilter(),
+        new FormatValuesInCsvFormatFilter(),
+        new GetWantedAmmenitiesFilter(),
+        new ConvertSpecialCharStringToSpecialChar()
     ));
 
     private static final Logger LOGGER = new Logger();
