@@ -3,11 +3,11 @@ package Filters;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TypeFilter implements Filter<String>{
+public class GetWantedAmmenitiesFilter implements Filter<String>{
 
     private List<String> buildingList = new ArrayList<>();
 
-    public TypeFilter() {
+    public GetWantedAmmenitiesFilter() {
         buildingList.add("cafe");
         buildingList.add("fast_food");
         buildingList.add("pub");
