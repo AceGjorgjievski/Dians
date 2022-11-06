@@ -1,4 +1,4 @@
-package Classes;
+package Classes.TagElements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.Map;
 public class NodeTag {
 
     private String nodeLine;
-    private String id;
 
     public static Map<String, String> mapTags = new HashMap<>();
     public static List<Tag> tagList = new ArrayList<>();
@@ -19,7 +18,7 @@ public class NodeTag {
     }
 
     private NodeTag(Tag tag) {
-        this.tagList.add(tag);
+        NodeTag.tagList.add(tag);
     }
 
     public static NodeTag createNode(String inputLine) {

@@ -1,12 +1,9 @@
-package Classes;
+package Classes.TagElements;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class NodeTagBody {
-    private String id;
-    private String latitude;
-    private String longitude;
     private Map<String, String> map = new HashMap<>();
 
     private static NodeTagBody instance = new NodeTagBody();
@@ -46,9 +43,6 @@ public class NodeTagBody {
     }
 
     private NodeTagBody(String id, String longitude, String latitude) {
-        this.id = id;
-        this.longitude = longitude;
-        this.latitude = latitude;
     }
 
     private NodeTagBody create(String id, String longitude, String latitude) {

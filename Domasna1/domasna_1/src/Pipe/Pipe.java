@@ -1,3 +1,5 @@
+package Pipe;
+
 import Filters.Filter;
 
 import java.util.ArrayList;

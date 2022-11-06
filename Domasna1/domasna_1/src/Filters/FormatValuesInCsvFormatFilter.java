@@ -34,7 +34,7 @@ public class ColumnFilter implements Filter<String> {
         } else if(key.equals("amenity")) {
             amenity = value;
             //vo shop da se stavi mapa i spored toa da se filtriraat ustanovite
-            checkCounter ++;
+            checkCounter++;
         }
 
         /**
