@@ -27,7 +27,7 @@ public class Main {
     }).toList();
 
     private static final List<Filter<String>> FILTERS = new ArrayList<Filter<String>>(Arrays.asList(
-        new GetSelfClosingNodesFilter(),
+        new RemoveSelfClosingNodesFilter(),
         new ExtractValuesFromXmlFilter(),
         new FormatValuesInCsvFormatFilter(),
         new GetWantedAmmenitiesFilter(),

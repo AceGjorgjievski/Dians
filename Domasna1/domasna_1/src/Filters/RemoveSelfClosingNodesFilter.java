@@ -1,6 +1,6 @@
 package Filters;
 
-public class GetSelfClosingNodesFilter implements Filter<String> {
+public class RemoveSelfClosingNodesFilter implements Filter<String> {
 
     private boolean hasNodeBody = false;
 

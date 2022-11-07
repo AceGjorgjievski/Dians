@@ -5,14 +5,14 @@ import java.util.List;
 
 public class GetWantedAmmenitiesFilter implements Filter<String>{
 
-    private List<String> buildingList = new ArrayList<>();
+    private List<String> allowedAmenitiesList = new ArrayList<>();
 
     public GetWantedAmmenitiesFilter() {
-        buildingList.add("cafe");
-        buildingList.add("fast_food");
-        buildingList.add("pub");
-        buildingList.add("bar");
-        buildingList.add("restaurant");
+        allowedAmenitiesList.add("cafe");
+        allowedAmenitiesList.add("fast_food");
+        allowedAmenitiesList.add("pub");
+        allowedAmenitiesList.add("bar");
+        allowedAmenitiesList.add("restaurant");
     }
 
 
@@ -21,7 +21,7 @@ public class GetWantedAmmenitiesFilter implements Filter<String>{
 
         if(inputLine != null) {
             String [] parts = inputLine.split(", ");
-            if(this.buildingList.contains(parts[3])) {
+            if(this.allowedAmenitiesList.contains(parts[3])) {
                 return inputLine;
             }
         }
