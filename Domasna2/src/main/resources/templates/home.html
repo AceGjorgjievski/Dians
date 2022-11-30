@@ -1,0 +1,170 @@
+<html>
+<head>
+    <title>FINDIFY</title>
+    <link rel="stylesheet" href="sliki/css/all.css">
+    <style>
+        body {
+            margin: 0;
+        }
+        #eventsSelectionTable td{
+            text-align: center;
+            padding: 2% 5%;
+        }
+        * {box-sizing: border-box;}
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            overflow: hidden;
+            background-color: #161616;
+            padding: 20px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            background-color: #161616;
+            color: #FFFFFF;
+        }
+
+        .header a.active {
+            background-color: #161616;
+            color: #FFFFFF;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .header-right {
+                float: none;
+            }
+        }
+
+
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
+</head>
+<body>
+<div class="header">
+    <a href="#default" class="logo">FINDIFY</a>
+    <div class="header-right">
+        <a><select name="opstina" id="opstina">
+            <option>Choose a municipality</option>
+            <option value="ks">Kisela Voda</option>
+            <option value="a">Aerodrom</option>
+            <option value="k1">Karpos 1</option>
+            <option value="k2">Karpos 2</option>
+            <option value="k3">Karpos 3</option>
+            <option value="k4">Karpos 4</option>
+            <option value="av">Avtokomanda</option>
+        </select></a>
+        <a > <button onclick="getLocation()" >send us location</button></a>
+        <a href="#home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
+        <a href="#contact"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+    </div>
+    <div id="demo" style="color: white;"> </div>
+</div>
+
+<div id="mapdiv"></div>
+<script>
+    function isNumber(str) {
+        if (typeof str != "string") return false
+        return !isNaN(str) &&
+            !isNaN(parseFloat(str))
+    }
+
+    function updateUrlHash(){
+        var zoom = map.getZoom();
+        var lonLat = map.getCenter().transform(
+            new OpenLayers.Projection("EPSG:3857"),
+            new OpenLayers.Projection("EPSG:4326")
+        );
+        window.location.hash = lonLat.lon.toFixed(7) + '/' + lonLat.lat.toFixed(7) + '/' + zoom;
+    }
+
+
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+
+    var pathHash = window.location.hash.substring(1).split('/');
+
+    var lon = 21.4248746;
+    var lat = 41.9960555;
+    var zoom = 14;
+    if(pathHash.length === 3) {
+        if (isNumber(pathHash[0]))
+            lon = pathHash[0];
+        if (isNumber(pathHash[1]))
+            lat = pathHash[1];
+        if (isNumber(pathHash[2]))
+            zoom = pathHash[2];
+    }
+    else{
+        window.location.hash = "21.4248746/41.9960555/14";
+    }
+
+    var lonLat = new OpenLayers.LonLat(lon, lat)
+        .transform(
+            new OpenLayers.Projection("EPSG:4326"),
+            new OpenLayers.Projection("EPSG:3857")
+        );
+
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+    var size = new OpenLayers.Size(45, 45);
+    var offset = new OpenLayers.Pixel(-(size.w / 2), 0);
+
+    map.setCenter(lonLat, zoom);
+    map.events.register('moveend', map, updateUrlHash);
+
+</script>
+<script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+</script>
+
+
+
+</body>
+
+</html>
