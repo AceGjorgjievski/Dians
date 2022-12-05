@@ -2,21 +2,31 @@ package com.example.diansspring.model;
 
 
 import com.example.diansspring.model.enums.FacilityType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
+@Entity
 public class Facility {
-
+    @Id
     private Long id;
     private String name;
     private String address;
     private FacilityType facilityType;
     private String municipality;
-    private int rating; //from 1 to 5
+    @OneToMany
+    private List<Review> reviews;
     private float longitude;
     private float latitude;
 
+    public Facility() {
+    }
 
     public Facility(Long id,
                     String name,
@@ -32,6 +42,6 @@ public class Facility {
         this.municipality = municipality;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.rating = -1;
+        this.reviews = new ArrayList<>();
     }
 }
