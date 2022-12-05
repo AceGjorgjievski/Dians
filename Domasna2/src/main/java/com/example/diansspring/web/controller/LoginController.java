@@ -1,4 +1,4 @@
-package com.example.diansspring.web;
+package com.example.diansspring.web.controller;
 
 
 import com.example.diansspring.model.User;

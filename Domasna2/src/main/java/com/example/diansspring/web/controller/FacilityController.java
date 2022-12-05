@@ -1,8 +1,8 @@
-package com.example.diansspring.web;
+package com.example.diansspring.web.controller;
 
 
-import com.example.diansspring.model.Amenity;
-import com.example.diansspring.service.AmenityService;
+import com.example.diansspring.model.Facility;
+import com.example.diansspring.service.FacilityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/") // home, login?
-public class AmenityController {
+public class FacilityController {
 
-    private final AmenityService amenityService;
+    private final FacilityService facilityService;
 
-    public AmenityController(AmenityService amenityService) {
-        this.amenityService = amenityService;
+    public FacilityController(FacilityService facilityService) {
+        this.facilityService = facilityService;
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class AmenityController {
             model.addAttribute("errorMsg",error);
         }
 
-        List<Amenity> amenityList = this.amenityService.listAll();
+        List<Facility> amenityList = this.facilityService.listAll();
         model.addAttribute("amenities",amenityList);
 
         return "listAmenities";

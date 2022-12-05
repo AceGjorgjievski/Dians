@@ -1,18 +1,16 @@
 package com.example.diansspring.bootstrap;
 
-import com.example.diansspring.model.Amenity;
+import com.example.diansspring.model.Facility;
 import com.example.diansspring.model.User;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Component
 public class DataHolder {
-    public static List<Amenity> amenities = new ArrayList<>();
+    public static List<Facility> amenities = new ArrayList<>();
     public static List<User> users = new ArrayList<>();
 
 //    @PostConstruct
