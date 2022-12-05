@@ -8,10 +8,10 @@ import java.util.Optional;
 public interface FacilityService {
 
     List<Facility> listAll();
-    List<Facility> searchAmenitiesByName(String name);
-    List<Facility> searchAmenitiesByMunicipality(String municipality);
-    List<Facility> searchAmenitiesByRating(int rating);
-
-    Optional<Facility> findById(Long id);
+//    List<Facility> searchAmenitiesByName(String name);
+//    List<Facility> searchAmenitiesByMunicipality(String municipality);
+//    List<Facility> searchAmenitiesByRating(int rating);
+//
+//    Optional<Facility> findById(Long id);
 
 }
