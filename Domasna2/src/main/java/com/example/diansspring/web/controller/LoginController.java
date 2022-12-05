@@ -32,7 +32,7 @@ public class LoginController {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            user = this.authService.login(username, password);
+//            user = this.authService.login(username, password);
 
             request.getSession().setAttribute("user",user);
             return "redirect:/home";

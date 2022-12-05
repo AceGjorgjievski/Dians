@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/") // home, login?
+@RequestMapping(value = {"", "/home"}) // home, login?
 public class FacilityController {
 
     private final FacilityService facilityService;
@@ -31,7 +31,7 @@ public class FacilityController {
         List<Facility> amenityList = this.facilityService.listAll();
         model.addAttribute("amenities",amenityList);
 
-        return "listAmenities";
+        return "home";
     }
 
 }
