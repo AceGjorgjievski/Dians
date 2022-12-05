@@ -1,6 +1,7 @@
 package com.example.diansspring.model;
 
 import com.example.diansspring.model.enums.FacilityType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -14,13 +15,25 @@ import java.util.List;
 public class Facility {
     @Id
     private Long id;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String address;
+
+    @Column(nullable = false)
     private FacilityType facilityType;
+
     private String municipality;
+
     @OneToMany
     private List<Review> reviews;
+
+    @Column(nullable = false)
     private float longitude;
+
+    @Column(nullable = false)
     private float latitude;
 
     public Facility() {
