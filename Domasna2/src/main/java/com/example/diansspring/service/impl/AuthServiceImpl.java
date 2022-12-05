@@ -3,7 +3,6 @@ package com.example.diansspring.service.impl;
 import com.example.diansspring.model.User;
 import com.example.diansspring.model.exceptions.InvalidArgumentException;
 import com.example.diansspring.model.exceptions.InvalidUserCredentialsException;
-import com.example.diansspring.repository.InMemoryUserRepository;
 import com.example.diansspring.service.AuthService;
 import org.springframework.stereotype.Service;
 

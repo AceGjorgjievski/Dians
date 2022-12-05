@@ -1,7 +1,6 @@
 package com.example.diansspring.service.impl;
 
 import com.example.diansspring.model.Facility;
-import com.example.diansspring.repository.InMemoryAmenityRepository;
 import com.example.diansspring.service.FacilityService;
 import org.springframework.stereotype.Service;
 

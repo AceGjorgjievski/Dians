@@ -1,6 +1,5 @@
 package com.example.diansspring.model;
 
-
 import com.example.diansspring.model.enums.FacilityType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,7 +8,6 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 @Entity
