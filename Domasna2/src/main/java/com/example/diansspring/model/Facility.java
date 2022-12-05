@@ -27,7 +27,7 @@ public class Facility {
 
     private String municipality;
 
-    @OneToMany
+    @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
     @Column(nullable = false)

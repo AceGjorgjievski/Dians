@@ -11,6 +11,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private Facility facility;
+
     @Column(nullable = false)
     private double rating;
 
