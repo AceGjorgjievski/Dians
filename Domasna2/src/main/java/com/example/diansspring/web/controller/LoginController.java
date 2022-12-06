@@ -1,4 +1,4 @@
-package com.example.diansspring.web;
+package com.example.diansspring.web.controller;
 
 
 import com.example.diansspring.model.User;
@@ -22,8 +22,12 @@ public class LoginController {
     }
 
     @GetMapping
-    public String getLogPage() {
-        return "login";
+    public String getLogPage(Model model) {
+        model.addAttribute("pageTitle", "Login - Findify");
+        model.addAttribute("mainCssFile", "login.css");
+        model.addAttribute("mainBodyContent", "login");
+
+        return "master-template";
     }
 
     @PostMapping
@@ -32,7 +36,7 @@ public class LoginController {
         try {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            user = this.authService.login(username, password);
+//            user = this.authService.login(username, password);
 
             request.getSession().setAttribute("user",user);
             return "redirect:/home";

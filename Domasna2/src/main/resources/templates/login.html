@@ -1,172 +1,27 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="sliki/css/all.css">
-    <title>Log in</title>
-    <style>
-        body {
-            margin: 0;
-        }
-        #eventsSelectionTable td{
-            text-align: center;
-            padding: 2% 5%;
-        }
-        * {box-sizing: border-box;}
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-            overflow: hidden;
-            background-color: #161616;
-            padding: 20px 10px;
-        }
-
-        .header a {
-            float: left;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 12px;
-            text-decoration: none;
-            font-size: 18px;
-            line-height: 25px;
-            border-radius: 4px;
-        }
-
-        .header a.logo {
-            font-size: 25px;
-            font-weight: bold;
-        }
-
-        .header a:hover {
-            background-color: #161616;
-            color: #FFFFFF;
-        }
-
-        .header a.active {
-            background-color: #161616;
-            color: #FFFFFF;
-        }
-
-        .header-right {
-            float: right;
-        }
-
-        @media screen and (max-width: 500px) {
-            .header a {
-                float: none;
-                display: block;
-                text-align: left;
-            }
-
-            .header-right {
-                float: none;
-            }
-        }
-        .center {
-            margin: auto;
-            width: 60%;
-            border: 3px solid #FFFFFF;
-            background-color: #F4F4F4;
-            padding: 10px;
-        }
-        form {border: 3px solid #f1f1f1;}
-
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #161616;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #161616;
-        }
-
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-        }
-
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
-        .container {
-            padding: 16px;
-        }
-
-        span.psw {
-            position: center;
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-
-
-    </style>
-</head>
-<body>
-<div class="header">
-    <a href="#default" class="logo">FINDIFY</a>
-    <div class="header-right">
-
-        <a href="#home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
-        <a href="#contact"><i class="fa fa-solid fa-map-location-dot tm-brand-icon"></i></a>
-    </div>
-</div>
 <div class="center">
-    <h1>Log in</h1>
-    <form th:method="POST" th:action="@{'/home'}">
+    <form th:action="@{'/login'}" style="border:1px solid #ccc" th:method="POST">
         <div class="container">
+            <h1>Log in</h1>
+            <br/>
 
-            <input type="text" placeholder="Email" name="uname" required>
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <div class="success" th:if="${param.successfullyRegistered != null}">Successfully registered. Please log in now.</div>
+            <br/>
 
-            <input type="password" placeholder="Password" name="psw" required>
-
-            <button type="submit">Login</button>
             <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
+                <b>Username</b>
+                <input type="text" placeholder="Username" name="username" required>
             </label>
-        </div>
-        <span class="psw"><a href="#">Forgot password?</a></span>
-        <br>
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Sing up</button>
+
+            <label>
+                <b>Password</b>
+                <input type="password" placeholder="Password" name="password" required>
+            </label>
+
+            <div class="clearfix">
+                <button type="submit" class="form-submit-btn" style="margin-bottom: 1.5rem;">Log in</button>
+                <a href="/register">New here? Create an account.</a>
+            </div>
         </div>
     </form>
-
 </div>
-</body>
-</html>

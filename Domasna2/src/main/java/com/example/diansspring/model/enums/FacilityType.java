@@ -1,6 +1,6 @@
 package com.example.diansspring.model.enums;
 
-public enum AmenityType {
+public enum FacilityType {
     FAST_FOOD,
     RESTAURANT,
     PUB,
