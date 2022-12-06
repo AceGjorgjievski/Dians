@@ -18,13 +18,17 @@ public class FacilityServiceImpl implements FacilityService {
         this.facilityRepository = facilityRepository;
     }
 
-
     @Override
     public List<Facility> listAll() {
         return this.facilityRepository.findAll();
     }
 
-//    @Override
+    @Override
+    public void save(Facility facility) {
+        facilityRepository.save(facility);
+    }
+
+    //    @Override
 //    public List<Facility> searchAmenitiesByName(String name) {
 //        return this.facilityRepository.findByName(name);
 //    }

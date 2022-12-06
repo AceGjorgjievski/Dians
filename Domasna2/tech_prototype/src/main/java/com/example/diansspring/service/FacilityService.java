@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface FacilityService {
 
     List<Facility> listAll();
+    void save(Facility facility);
+
 //    List<Facility> searchAmenitiesByName(String name);
 //    List<Facility> searchAmenitiesByMunicipality(String municipality);
 //    List<Facility> searchAmenitiesByRating(int rating);

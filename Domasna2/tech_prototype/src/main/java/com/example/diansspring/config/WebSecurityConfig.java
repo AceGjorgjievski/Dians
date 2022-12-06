@@ -26,7 +26,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/admin/**").hasRole("ROLE_ADMIN")
+//                        .requestMatchers("/admin2/**").hasRole("ROLE_ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form

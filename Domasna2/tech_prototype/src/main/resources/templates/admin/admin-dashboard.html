@@ -1,3 +1,6 @@
 <form th:action="@{/admin/update-facilities-in-database}" th:method="POST">
+    <div class="success" th:if="${param.success != null}">Success!</div>
+    <div class="error" th:if="${param.error != null}">Error!</div>
+
     <button type="submit">Update Facilities In Database</button>
 </form>
