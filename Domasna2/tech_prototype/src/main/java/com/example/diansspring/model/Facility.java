@@ -30,6 +30,12 @@ public class Facility {
     @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
+    private float reviewRatingsSum;
+
+    private int reviewRatingsCount;
+
+    private int reviewRatingsAverage;
+
     @Column(nullable = false)
     private float longitude;
 
@@ -43,16 +49,28 @@ public class Facility {
                     String name,
                     String address,
                     FacilityType facilityType,
-                    String municipality,
-                    float longitude,
-                    float latitude) {
+                    float latitude,
+                    float longitude) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.facilityType = facilityType;
-        this.municipality = municipality;
-        this.longitude = longitude;
+        this.municipality = "";
         this.latitude = latitude;
+        this.longitude = longitude;
         this.reviews = new ArrayList<>();
+        this.reviewRatingsSum = 0;
+        this.reviewRatingsCount = 0;
+        this.reviewRatingsAverage = 0;
+    }
+
+    public static Facility create(String str) {
+        String[] arr = str.split(", ");
+        return new Facility(Long.parseLong(arr[0]),
+                            arr[1],
+                            arr[2],
+                            FacilityType.valueOf(arr[3].toUpperCase()),
+                            Float.parseFloat(arr[4]),
+                            Float.parseFloat(arr[5]));
     }
 }
