@@ -1,19 +1,237 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" href="sliki/css/all.css">
+    <style>
+        body {
+            margin: 0;
+        }
+        #eventsSelectionTable td{
+            text-align: center;
+            padding: 2% 5%;
+        }
+        * {box-sizing: border-box;}
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            overflow: hidden;
+            background-color: #161616;
+            padding: 20px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            background-color: #161616;
+            color: #FFFFFF;
+        }
+
+        .header a.active {
+            background-color: #161616;
+            color: #FFFFFF;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .header-right {
+                float: none;
+            }
+        }
+        .center {
+            margin: auto;
+            width: 60%;
+            border: 3px solid #FFFFFF;
+            background-color: #F4F4F4;
+            padding: 10px;
+        }
+        form {border: none}
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+            border: 1px solid #ccc;
+        }
+
+        hr {
+            border: none;
+            margin-bottom: 25px;
+        }
+
+        /* Set a style for all buttons */
+        button:nth-child(1) {
+            border: 1px solid #ccc;
+            color: black;
+            padding: 14px 20px;
+            margin: 8px 0;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+        button:nth-child(2) {
+            background-color: #161616;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+        button:nth-child(3) {
+            background-color: #161616;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        button:hover {
+            opacity:1;
+        }
+
+        /* Extra styles for the cancel button */
+        .login {
+            padding: 14px 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .login, .registerbtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .error {
+            color: red;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+            .login, .registerbtn {
+                width: 100%;
+            }
+        }
+
+
+    </style>
 </head>
 <body>
+<div class="header">
+    <!--    <a href="#default" class="logo">FINDIFY</a>-->
+    <a class="logo">FINDIFY</a>
+    <div class="header-right">
 
-    <form th:method="POST" th:action="@{'/login'}">
-        Name: <input type="text" name="name"> <br>
-        Surname: <input type="text" name="surname"> <br>
-        Username: <input type="text" name="username"> <br>
-        Password: <input type="password" name="password"> <br>
-        <input type="submit" value="submit">
+        <!--        <a href="#home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>-->
+        <!--        <a href="#contact"><i class="fa fa-solid fa-map-location-dot tm-brand-icon"></i></a>-->
+    </div>
+</div>
+<div class="center">
+
+    <!--    <form action="/action_page.php" style="border:1px solid #ccc">-->
+    <form action="/register" style="border:1px solid #ccc" th:method="POST">
+        <div class="container">
+            <h1>Register</h1>
+            <hr>
+
+            <label><b>Name</b></label>
+            <input type="text" placeholder="Name" name="name" required>
+
+            <label><b>Surname</b></label>
+            <input type="text" placeholder="Surname" name="surname" required>
+
+            <label><b>Username</b></label>
+            <input type="text" placeholder="Username" name="username" required>
+
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Password" name="password" required>
+
+            <label><b>Repeat Password</b></label>
+            <input type="password" placeholder="Confirm Password" name="password-repeat" required>
+
+            <!--            <label>-->
+            <!--                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me-->
+            <!--            </label>-->
+            <div th:if="${hasRegisterError}" class="error">
+                <div th:text="${registerMessageError}"></div>
+            </div>
+
+            <div class="clearfix">
+                <button type="submit" class="registerbtn">Register</button>
+                <!--                <a href="/login" class="registerbtn">Register</a>-->
+                <a > <button type="button" onclick="loginFunc()">Back</button></a>
+                <!--                <button>Log in</button>-->
+            </div>
+        </div>
     </form>
 
+    <script>
+        function loginFunc() {
+            window.location = "login";
+        }
+    </script>
+
+</div>
 </body>
 </html>

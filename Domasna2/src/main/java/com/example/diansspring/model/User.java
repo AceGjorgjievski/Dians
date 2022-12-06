@@ -20,7 +20,6 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired = true;
     private boolean isEnabled = true;
 
-
     @Id
     private String username;
 
