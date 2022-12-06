@@ -1,4 +1,4 @@
-<header xmlns:th="http://www.thymeleaf.org">
+<header xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     <div class="header">
         <a href="/home" class="logo">FINDIFY</a>
 
@@ -16,10 +16,14 @@
 <!--                </a>-->
 <!--            </form>-->
 
-            <a class="btn btn-light" href="/logout"> Logout</a>
-
             <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
-            <a href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+
+            <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+            <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-light">Logout</a>
+
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="btn btn-light">Admin</a>
+
+            <a sec:authorize="!isAuthenticated()" href="/logout" class="btn btn-light">Login</a>
         </div>
 
         <div id="demo" style="color: white;">

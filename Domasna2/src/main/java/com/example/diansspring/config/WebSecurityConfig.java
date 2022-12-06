@@ -7,11 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -30,7 +26,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ROLE_ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
@@ -46,7 +42,7 @@ public class WebSecurityConfig {
                         .deleteCookies("FINDIFY_COOKIE")
                         .logoutSuccessUrl("/login")
                 )
-                .exceptionHandling((excp) -> excp
+                .exceptionHandling((exception) -> exception
                         .accessDeniedPage("/access-denied")
                 );
 
@@ -60,16 +56,4 @@ public class WebSecurityConfig {
 
         return authenticationManagerBuilder.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService(AuthenticationManagerBuilder auth) {
-//        UserDetails user =
-//                User.builder()
-//                        .username("admin")
-//                        .password(passwordEncoder.encode("admin"))
-//                        .roles("ADMIN")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }
