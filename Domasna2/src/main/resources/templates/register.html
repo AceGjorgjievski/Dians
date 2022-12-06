@@ -189,49 +189,44 @@
 </div>
 <div class="center">
 
-    <!--    <form action="/action_page.php" style="border:1px solid #ccc">-->
-    <form action="/register" style="border:1px solid #ccc" th:method="POST">
+    <form th:action="@{/register}" style="border:1px solid #ccc" th:method="POST">
         <div class="container">
             <h1>Register</h1>
             <hr>
 
-            <label><b>Name</b></label>
-            <input type="text" placeholder="Name" name="name" required>
+            <label>
+                <b>Username</b>
+                <input type="text" placeholder="Username" name="username" required>
+            </label>
 
-            <label><b>Surname</b></label>
-            <input type="text" placeholder="Surname" name="surname" required>
+            <label>
+                <b>Password</b>
+                <input type="password" placeholder="Password" name="password" required>
+            </label>
 
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Username" name="username" required>
+            <label>
+                <b>Repeat Password</b>
+                <input type="password" placeholder="Repeat password" name="repeatPassword" required>
+            </label>
 
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Password" name="password" required>
+            <label>
+                <b>Email</b>
+                <input type="text" placeholder="Email" name="email" required>
+            </label>
 
-            <label><b>Repeat Password</b></label>
-            <input type="password" placeholder="Confirm Password" name="password-repeat" required>
+            <label>
+                <b>Nice Name</b>
+                <input type="text" placeholder="Nice Name" name="niceName" required>
+            </label>
 
-            <!--            <label>-->
-            <!--                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me-->
-            <!--            </label>-->
-            <div th:if="${hasRegisterError}" class="error">
-                <div th:text="${registerMessageError}"></div>
-            </div>
+            <div class="error" th:if="${registerMessageError != null}" th:text="${registerMessageError}"></div>
 
             <div class="clearfix">
-                <button type="submit" class="registerbtn">Register</button>
-                <!--                <a href="/login" class="registerbtn">Register</a>-->
-                <a > <button type="button" onclick="loginFunc()">Back</button></a>
-                <!--                <button>Log in</button>-->
+                <button type="submit" class="registerbtn" style="margin-bottom: 1.5rem;">Register</button>
+                <a href="/login">Already registered? Log in instead.</a>
             </div>
         </div>
     </form>
-
-    <script>
-        function loginFunc() {
-            window.location = "login";
-        }
-    </script>
-
 </div>
 </body>
 </html>

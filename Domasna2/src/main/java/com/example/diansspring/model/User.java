@@ -42,13 +42,13 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String password, String email, String niceName, LocalDateTime accountCreationDate, Role role) {
+    public User(String username, String password, String email, String niceName) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.niceName = niceName;
-        this.accountCreationDate = accountCreationDate;
-        this.role = role;
+        this.accountCreationDate = LocalDateTime.now();
+        this.role = Role.ROLE_USER;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
