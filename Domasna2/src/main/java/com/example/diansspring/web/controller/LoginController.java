@@ -23,6 +23,7 @@ public class LoginController {
 
     @GetMapping
     public String getLogPage(Model model) {
+        model.addAttribute("pageTitle", "Login - Findify");
         model.addAttribute("mainCssFile", "login.css");
         model.addAttribute("mainBodyContent", "login");
 

@@ -1,143 +1,83 @@
-body {
-    margin: 0;
-}
-#eventsSelectionTable td{
-    text-align: center;
-    padding: 2% 5%;
-}
-* {box-sizing: border-box;}
+/*.center {*/
+/*    margin: auto;*/
+/*    width: 60%;*/
+/*    border: 3px solid #FFFFFF;*/
+/*    background-color: #F4F4F4;*/
+/*    padding: 10px;*/
+/*}*/
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
+/*form {border: 3px solid #f1f1f1;}*/
 
-.header {
-    overflow: hidden;
-    background-color: #161616;
-    padding: 20px 10px;
-}
+/*input[type=text], input[type=password] {*/
+/*    width: 100%;*/
+/*    padding: 12px 20px;*/
+/*    margin: 8px 0;*/
+/*    display: inline-block;*/
+/*    border: 1px solid #ccc;*/
+/*    box-sizing: border-box;*/
+/*}*/
 
-.header a {
-    float: left;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
-}
+/*button {*/
+/*    background-color: #161616;*/
+/*    color: white;*/
+/*    padding: 14px 20px;*/
+/*    margin: 8px 0;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    width: 100%;*/
+/*}*/
 
-.header a.logo {
-    font-size: 25px;
-    font-weight: bold;
-}
+/*button:hover {*/
+/*    opacity: 0.8;*/
+/*}*/
 
-.header a:hover {
-    background-color: #161616;
-    color: #FFFFFF;
-}
+/*.login {*/
+/*    width: auto;*/
+/*    padding: 10px 18px;*/
+/*    background-color: #161616;*/
+/*}*/
 
-.header a.active {
-    background-color: #161616;
-    color: #FFFFFF;
-}
+/*.imgcontainer {*/
+/*    text-align: center;*/
+/*    margin: 24px 0 12px 0;*/
+/*}*/
 
-.header-right {
-    float: right;
-}
+/*img.avatar {*/
+/*    width: 40%;*/
+/*    border-radius: 50%;*/
+/*}*/
 
-@media screen and (max-width: 500px) {
-    .header a {
-        float: none;
-        display: block;
-        text-align: left;
-    }
+/*.container {*/
+/*    padding: 16px;*/
+/*}*/
 
-    .header-right {
-        float: none;
-    }
-}
-.center {
-    margin: auto;
-    width: 60%;
-    border: 3px solid #FFFFFF;
-    background-color: #F4F4F4;
-    padding: 10px;
-}
-form {border: 3px solid #f1f1f1;}
+/*span.psw {*/
+/*    position: center;*/
+/*}*/
 
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
+/*.error {*/
+/*    color: red;*/
+/*}*/
 
-button {
-    background-color: #161616;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
+/*.register {*/
+/*    font: bold 11px Arial;*/
+/*    text-decoration: none;*/
+/*    background-color: #EEEEEE;*/
+/*    color: #333333;*/
+/*    padding: 2px 6px 2px 6px;*/
+/*    border-top: 1px solid #CCCCCC;*/
+/*    border-right: 1px solid #333333;*/
+/*    border-bottom: 1px solid #333333;*/
+/*    border-left: 1px solid #CCCCCC;*/
+/*}*/
 
-button:hover {
-    opacity: 0.8;
-}
-
-.login {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #161616;
-}
-
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
-}
-
-span.psw {
-    position: center;
-}
-
-.error {
-    color: red;
-}
-
-.register {
-    font: bold 11px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .login {
-        width: 100%;
-    }
-}
+/*!* Change styles for span and cancel button on extra small screens *!*/
+/*@media screen and (max-width: 300px) {*/
+/*    span.psw {*/
+/*        display: block;*/
+/*        float: none;*/
+/*    }*/
+/*    .login {*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/

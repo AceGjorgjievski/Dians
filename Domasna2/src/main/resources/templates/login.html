@@ -1,22 +1,27 @@
 <div class="center">
-    <h1>Log in</h1>
-    <form th:method="POST" th:action="@{'/login'}">
+    <form th:action="@{'/login'}" style="border:1px solid #ccc" th:method="POST">
         <div class="container">
+            <h1>Log in</h1>
+            <br/>
 
-            <input type="text" placeholder="Username" name="username" required>
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <div class="success" th:if="${param.successfullyRegistered != null}">Successfully registered. Please log in now.</div>
+            <br/>
 
-            <input type="password" placeholder="Password" name="password" required>
+            <label>
+                <b>Username</b>
+                <input type="text" placeholder="Username" name="username" required>
+            </label>
 
-            <div th:if="${hasError}" class="error">
-                <div th:text="${error}"></div>
+            <label>
+                <b>Password</b>
+                <input type="password" placeholder="Password" name="password" required>
+            </label>
+
+            <div class="clearfix">
+                <button type="submit" class="form-submit-btn" style="margin-bottom: 1.5rem;">Log in</button>
+                <a href="/register">New here? Create an account.</a>
             </div>
-
-            <button type="submit">Login</button>
-
         </div>
-        <br/>
-        <span class="psw"><a href="/register" class="register">Register</a></span>
-
     </form>
-
 </div>

@@ -1,9 +1,11 @@
 <div class="center">
-
     <form th:action="@{/register}" style="border:1px solid #ccc" th:method="POST">
         <div class="container">
             <h1>Register</h1>
-            <hr>
+            <br/>
+
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <br/>
 
             <label>
                 <b>Username</b>
@@ -29,8 +31,6 @@
                 <b>Nice Name</b>
                 <input type="text" placeholder="Nice Name" name="niceName" required>
             </label>
-
-            <div class="error" th:if="${registerMessageError != null}" th:text="${registerMessageError}"></div>
 
             <div class="clearfix">
                 <button type="submit" class="registerbtn" style="margin-bottom: 1.5rem;">Register</button>

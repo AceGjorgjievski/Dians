@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping(value = {"/", "/home"})
 public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model) {
+        model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainCssFile", "home.css");
         model.addAttribute("mainBodyContent", "home");
 
