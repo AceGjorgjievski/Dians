@@ -1,0 +1,30 @@
+<header xmlns:th="http://www.thymeleaf.org">
+    <div class="header">
+        <a href="/home" class="logo">FINDIFY</a>
+
+        <div class="header-right">
+
+<!--            <form th:method="POST" th:action="@{'/home'}">-->
+<!--                <a>-->
+<!--                    <select th:name="userOption" th:id="opstina">-->
+<!--                        <option th:selected="selected" th:value="all">All amenities in Skopje</option>-->
+<!--                        <option th:value="local">Nearby Where I am Now</option>-->
+<!--                    </select>-->
+<!--                </a>-->
+<!--                <a>-->
+<!--                    <button th:type="submit" th:value="submit">Search</button>-->
+<!--                </a>-->
+<!--            </form>-->
+
+            <a class="btn btn-light" href="/logout"> Logout</a>
+
+            <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
+            <a href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+        </div>
+
+        <div id="demo" style="color: white;">
+
+        </div>
+
+    </div>
+</header>
