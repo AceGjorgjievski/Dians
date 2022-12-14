@@ -1,0 +1,96 @@
+<div id="mapdiv"></div>
+
+<script th:inline="javascript">
+    function isNumber(str) {
+        if (typeof str != "string") return false
+        return !isNaN(str) &&
+            !isNaN(parseFloat(str))
+    }
+
+    const options = {
+        lat: 41.9965,
+        lng: 21.4314,
+        zoom: 13.75,
+        style: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+    }
+
+    /*<![CDATA[*/
+    var facilities = /*[[${facilities}]]*/ "Facilities";
+    /*]]>*/
+
+    let trainMap;
+    let canvas;
+    const mappa = new Mappa('Leaflet');
+
+    let dropPinAmenity;
+    let offsetEllipse = 100;
+    let scalar = 20;
+    let angle = 10;
+
+    let buttonToBeShown = false;
+
+    function preload() {
+        // dropPinAmenity = loadImage('static/images/drop_pin_amenity.png');
+    }
+
+    function mouseClicked(e) {
+        console.log(e);
+    }
+
+    function showFacility(facility) {
+        fill(255, 0, 0, facility.alpha);
+        ellipse(facility.x, facility.y, facility.size, facility.size);
+    }
+
+    function setup() {
+        canvas = createCanvas(windowWidth - 10, windowHeight - 100);
+        trainMap = mappa.tileMap(options);
+        trainMap.overlay(canvas);
+
+        trainMap.onChange(drawPoints);
+    }
+
+    function drawPoints() {
+        clear();
+
+        fill(255, 0, 0, 100); // (r,g,b, alpha)
+        let size = 50;
+        size = map(size, 558, 60000000, 1, 70) + trainMap.zoom();
+
+        for (let i = 0; i < facilities.length; i++) {
+            let px = facilities[i].latitude;
+            let py = facilities[i].longitude;
+            const pix = trainMap.latLngToPixel(px, py);
+
+            facilities[i].options = {
+                x: pix.x,
+                y: pix.y,
+                visible: true,
+                clicked: false,
+                size: size,
+                alpha: 100,
+            }
+
+            showFacility(facilities[i].options);
+
+            // image('src/main/resources/static/images/drop_pin_amenity.png', pix.x, pix.y);
+        }
+    }
+</script>
+
+<script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+    }
+</script>

@@ -1,0 +1,25 @@
+<div class="center">
+    <form style="border:1px solid #ccc">
+        <div class="container">
+            <h1>My Account</h1>
+            <br/>
+
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <br/>
+
+            <label>
+                <b>Username</b>
+                <input type="text" placeholder="Username" name="username" required readonly th:value="${currentUserUsername != null ? currentUserUsername : '/'}">
+            </label>
+
+            <label>
+                <b>Nice Name</b>
+                <input type="text" placeholder="Nice Name" name="niceName" required readonly th:value="${currentUserNiceName != null ? currentUserNiceName : '/'}">
+            </label>
+
+            <div class="clearfix">
+                <button class="form-submit-btn" style="margin-bottom: 1.5rem;" disabled>Change Password</button>
+            </div>
+        </div>
+    </form>
+</div>

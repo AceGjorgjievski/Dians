@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <meta charset="UTF-8"/>
+
+        <title th:text="${pageTitle}">Findify</title>
+
+        <link rel="stylesheet" href="font-awesome/css/all.css"/>
+        <link rel="stylesheet" href="css/globals.css"/>
+        <link th:if="${mainCssFile != null}" rel="stylesheet" th:href="${'css/' + mainCssFile}"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mappa-mundi@0.0.4"></script>
+
+    </head>
+
+    <body>
+
+        <header th:replace="fragments/header"></header>
+
+        <section th:include="${mainBodyContent}"></section>
+
+        <footer th:replace="fragments/footer"></footer>
+
+    </body>
+</html>
