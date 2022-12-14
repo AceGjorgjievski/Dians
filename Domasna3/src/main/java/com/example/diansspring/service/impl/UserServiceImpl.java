@@ -2,6 +2,7 @@ package com.example.diansspring.service.impl;
 
 import com.example.diansspring.model.User;
 import com.example.diansspring.model.enums.Role;
+import com.example.diansspring.model.exceptions.CaptchaDoesNotMatchException;
 import com.example.diansspring.model.exceptions.PasswordsDoNotMatchException;
 import com.example.diansspring.model.exceptions.UserAlreadyExistsException;
 import com.example.diansspring.repository.UserRepository;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String username, String password, String repeatPassword, String email, String niceName) {
+    public User register(String username, String password, String repeatPassword, String email, String niceName, String hiddenCaptcha, String captcha) {
         if (username == null || username.isEmpty() || password == null || password.isEmpty() || email == null || email.isEmpty()) {
             throw new BadCredentialsException("Missing username or password");
         }
@@ -37,6 +38,9 @@ public class UserServiceImpl implements UserService {
         }
         if (this.userRepository.findByUsername(username).isPresent() || this.userRepository.findByEmail(email).isPresent()) {
             throw new UserAlreadyExistsException();
+        }
+        if (hiddenCaptcha == null || !hiddenCaptcha.equals(captcha)) {
+            throw new CaptchaDoesNotMatchException();
         }
 
         User user = new User(username, passwordEncoder.encode(password), email, niceName);

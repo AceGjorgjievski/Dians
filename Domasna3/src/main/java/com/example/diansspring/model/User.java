@@ -40,6 +40,15 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @Transient
+    private String captcha;
+
+    @Transient
+    private String hiddenCaptcha;
+
+    @Transient
+    private String realCaptcha;
+
     public User() {
     }
 
