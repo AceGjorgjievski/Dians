@@ -32,6 +32,18 @@
                 <input type="text" placeholder="Nice Name" name="niceName" required>
             </label>
 
+            <div>
+                <img th:src="*{'data:realCaptcha/jpg;base64,'+ captchaDetailsUser.realCaptcha}" alt="The captcha to enter"/>
+            </div>
+
+            <input type="hidden" th:field="*{captchaDetailsUser.hiddenCaptcha}"/>
+            <br/>
+
+            <label>
+                <b>Enter Captcha</b>
+                <input type="text" th:field="*{captchaDetailsUser.captcha}" placeholder="Enter captcha"/>
+            </label>
+
             <div class="clearfix">
                 <button type="submit" class="registerbtn" style="margin-bottom: 1.5rem;">Register</button>
                 <a href="/login">Already registered? Log in instead.</a>

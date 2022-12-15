@@ -7,5 +7,5 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface UserService extends UserDetailsService {
-    User register(String username, String password, String repeatPassword, String email, String niceName);
+    User register(String username, String password, String repeatPassword, String email, String niceName, String hiddenCaptcha, String captcha);
 }
