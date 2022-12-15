@@ -36,12 +36,12 @@
                 <img th:src="*{'data:realCaptcha/jpg;base64,'+ captchaDetailsUser.realCaptcha}" alt="The captcha to enter"/>
             </div>
 
-            <input type="hidden" name="hiddenCaptcha" th:field="*{captchaDetailsUser.hiddenCaptcha}"/>
+            <input type="hidden" th:field="*{captchaDetailsUser.hiddenCaptcha}"/>
             <br/>
 
             <label>
                 <b>Enter Captcha</b>
-                <input type="text" name="realCaptcha" th:field="*{captchaDetailsUser.captcha}" placeholder="Enter captcha"/>
+                <input type="text" th:field="*{captchaDetailsUser.captcha}" placeholder="Enter captcha"/>
             </label>
 
             <div class="clearfix">
