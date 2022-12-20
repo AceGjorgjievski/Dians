@@ -10,7 +10,7 @@
         <div class="header-right" style="display: flex; align-items: center;">
 
             <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
-            <a id="goToMyLocation"><i class="fa-solid fa-bullseye"></i></a>
+            <a id="goToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
 
             <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
             <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-light">Logout</a>
