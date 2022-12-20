@@ -10,9 +10,15 @@
         <link rel="stylesheet" href="css/globals.css"/>
         <link th:if="${mainCssFile != null}" rel="stylesheet" th:href="${'css/' + mainCssFile}"/>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/mappa-mundi@0.0.4"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+              integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+              crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+                integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+                crossorigin=""></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     </head>
 

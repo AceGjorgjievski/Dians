@@ -22,3 +22,7 @@ body {
 .success {
     color: green;
 }
+
+#mapdiv {
+    height: 90vh;
+}
