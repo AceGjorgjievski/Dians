@@ -1,5 +1,6 @@
 @import "globals/header.css";
 @import "globals/form.css";
+@import "globals/footer.css";
 
 body {
     margin: 0;
@@ -21,4 +22,20 @@ body {
 
 .success {
     color: green;
+}
+
+#mapdiv {
+    height: 90vh;
+}
+
+.button--footer {
+    padding-inline: 40px;
+    padding-block: 12px;
+
+    border-radius: 6px;
+}
+
+.button--primary {
+    background-color: #161616 !important;
+    color: white !important;
 }

@@ -9,29 +9,16 @@
 
         <div class="header-right" style="display: flex; align-items: center;">
 
-<!--            <form th:method="POST" th:action="@{'/home'}">-->
-<!--                <a>-->
-<!--                    <select th:name="userOption" th:id="opstina">-->
-<!--                        <option th:selected="selected" th:value="all">All amenities in Skopje</option>-->
-<!--                        <option th:value="local">Nearby Where I am Now</option>-->
-<!--                    </select>-->
-<!--                </a>-->
-<!--                <a>-->
-<!--                    <button th:type="submit" th:value="submit">Search</button>-->
-<!--                </a>-->
-<!--            </form>-->
-
             <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
+            <a id="goToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
+            <a id="shareMyLocation" style="cursor: pointer;"><i class="fas fa-location-arrow"></i></a>
 
             <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
-            <a sec:authorize="isAuthenticated()" href="/logout" class="btn btn-light">Logout</a>
+            <a sec:authorize="isAuthenticated()" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
 
-            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin" class="btn btn-light">Admin</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"><i class="fas fa-user-shield"></i></a>
 
-            <a sec:authorize="!isAuthenticated()" href="/logout" class="btn btn-light">Login</a>
+            <a sec:authorize="!isAuthenticated()" href="/logout"><i class="fas fa-sign-in-alt"></i></a>
         </div>
-
-<!--        <div id="demo" style="color: white;"></div>-->
-
     </div>
 </header>

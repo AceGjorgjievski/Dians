@@ -30,7 +30,7 @@ public class Facility {
     @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
-    private float reviewRatingsSum;
+    private double reviewRatingsSum;
 
     private int reviewRatingsCount;
 
