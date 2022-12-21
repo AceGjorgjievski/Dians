@@ -6,6 +6,10 @@ function drawInitialMap() {
         style: "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
     }
 
+    if (GLOBALS.mapCoordinatesFromUrl.lat !== -1) OPTIONS.lat = GLOBALS.mapCoordinatesFromUrl.lat;
+    if (GLOBALS.mapCoordinatesFromUrl.lng !== -1) OPTIONS.lng = GLOBALS.mapCoordinatesFromUrl.lng;
+    if (GLOBALS.mapCoordinatesFromUrl.zoom !== -1) OPTIONS.zoom = GLOBALS.mapCoordinatesFromUrl.zoom;
+
     GLOBALS.initialOptions = OPTIONS;
 
     GLOBALS.map = L.map('mapdiv')
@@ -18,3 +22,11 @@ function drawInitialMap() {
     }).addTo(GLOBALS.map);
 }
 drawInitialMap();
+
+function drawYellowMarkerOnSharedLocation() {
+    if (GLOBALS?.mapCoordinatesFromUrl?.lat !== -1 && GLOBALS?.mapCoordinatesFromUrl?.lng !== -1) {
+        GLOBALS.profiles.markerOnSharedLocation = L.marker([GLOBALS.mapCoordinatesFromUrl.lat, GLOBALS.mapCoordinatesFromUrl.lng], GLOBALS.initialOptions.zoom).addTo(GLOBALS.map);
+        GLOBALS.profiles.markerOnSharedLocation.setIcon(GLOBALS.yellowIcon);
+    }
+}
+drawYellowMarkerOnSharedLocation();

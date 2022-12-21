@@ -25,7 +25,10 @@
     <body>
 
         <header th:replace="fragments/header"></header>
-        <footer th:replace="fragments/footer"></footer>
+
+        <th:block  th:if="${mainBodyContent == 'home'}">
+            <footer th:replace="fragments/footer"></footer>
+        </th:block>
 
         <section th:include="${mainBodyContent}"></section>
 
