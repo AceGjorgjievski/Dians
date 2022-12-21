@@ -39,3 +39,35 @@ body {
     background-color: #161616 !important;
     color: white !important;
 }
+
+#stars {
+    display: flex;
+    gap: 6px;
+    background: #161616;
+
+    padding-block: 6px;
+    padding-inline: 12px;
+    border-radius: 6px;
+
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.star {
+    overflow: hidden;
+}
+
+.star>div {
+    width: 20px;
+    height: 20px;
+    background: yellow;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-partial {
+    width: var(--starPartial);
+}
+
+.star-empty {
+    width: 0px;
+}

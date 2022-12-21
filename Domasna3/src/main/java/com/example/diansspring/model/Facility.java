@@ -30,11 +30,9 @@ public class Facility {
     @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
-    private double reviewRatingsSum;
-
     private int reviewRatingsCount;
 
-    private int reviewRatingsAverage;
+    private float reviewRatingsAverage;
 
     @Column(nullable = false)
     private float longitude;
@@ -59,7 +57,6 @@ public class Facility {
         this.latitude = latitude;
         this.longitude = longitude;
         this.reviews = new ArrayList<>();
-        this.reviewRatingsSum = 0;
         this.reviewRatingsCount = 0;
         this.reviewRatingsAverage = 0;
     }

@@ -23,7 +23,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomePage(@RequestParam(required = false) Double lat, @RequestParam(required = false) Double lng, @RequestParam(required = false) Double zoom, Model model) {
+    public String getHomePage(@RequestParam(required = false) Float lat, @RequestParam(required = false) Float lng, @RequestParam(required = false) Float zoom, Model model) {
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
         model.addAttribute("facilities", this.facilityService.listAll());

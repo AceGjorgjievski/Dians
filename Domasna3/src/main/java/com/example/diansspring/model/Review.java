@@ -15,14 +15,14 @@ public class Review {
     private Facility facility;
 
     @Column(nullable = false)
-    private double rating;
+    private float rating;
 
     private String comment;
 
     public Review() {
     }
 
-    public Review(double rating, String comment) {
+    public Review(float rating, String comment) {
         this.rating = rating;
         this.comment = comment;
     }

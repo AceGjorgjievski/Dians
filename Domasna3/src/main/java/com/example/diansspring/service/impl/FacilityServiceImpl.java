@@ -28,23 +28,4 @@ public class FacilityServiceImpl implements FacilityService {
         facilityRepository.save(facility);
     }
 
-    //    @Override
-//    public List<Facility> searchAmenitiesByName(String name) {
-//        return this.facilityRepository.findByName(name);
-//    }
-//
-//    @Override
-//    public List<Facility> searchAmenitiesByMunicipality(String municipality) {
-//        return this.facilityRepository.findByMunicipality(municipality);
-//    }
-//
-//    @Override
-//    public List<Facility> searchAmenitiesByRating(int rating) {
-//        return this.facilityRepository.findByRating(rating);
-//    }
-//
-//    @Override
-//    public Optional<Facility> findById(Long id) {
-//        return this.facilityRepository.findById(id);
-//    }
 }
