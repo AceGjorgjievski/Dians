@@ -23,7 +23,6 @@ public class RegisterController {
     @GetMapping
     public String getRegisterPage(Model model) {
         model.addAttribute("pageTitle", "Register - Findify");
-        model.addAttribute("mainCssFile", "register.css");
         model.addAttribute("mainBodyContent", "register");
 
         User user = new User();

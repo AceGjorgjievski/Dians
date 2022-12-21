@@ -1,7 +1,14 @@
 <div id="mapdiv"></div>
 
 <script th:inline="javascript">
-    var facilities = /*[[${facilities}]]*/ "Facilities";
+    var GLOBALS = {};
+    GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
+    GLOBALS.profiles = {};
 </script>
 
-<script src="js/map.js"></script>
+<script src="js/drawInitialMap.js"></script>
+<script src="js/createDropPinIcons.js"></script>
+<script src="js/geolocation.js"></script>
+<script src="js/dropFacilitiesPins.js"></script>
+<script src="js/manageDistanceRadius.js"></script>
+<script src="js/main.js"></script>

@@ -16,7 +16,6 @@ public class LocationController {
     @GetMapping("/go-to-my-location")
     public String goToMyLocation(Model model) {
         model.addAttribute("pageTitle", "Home - Findify");
-        model.addAttribute("mainCssFile", "home.css");
         model.addAttribute("mainBodyContent", "home");;
         model.addAttribute("facilities", this.facilityService.listAll());
 

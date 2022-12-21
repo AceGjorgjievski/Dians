@@ -31,7 +31,6 @@ public class AdminController {
     @GetMapping
     public String getAdminDashboard(Model model) {
         model.addAttribute("pageTitle", "Admin Dashboard - Findify");
-        model.addAttribute("mainCssFile", "admin/admin.css");
         model.addAttribute("mainBodyContent", "admin/admin-dashboard");
 
         return "master-template";
