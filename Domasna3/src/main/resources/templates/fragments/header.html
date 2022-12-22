@@ -8,6 +8,16 @@
         </div>
 
         <div class="header-right" style="display: flex; align-items: center;">
+            <th:block th:if="${facilityTypes != undefined}">
+                <label>
+                    <select id="filterByFacilityType" style="margin-right: 6px; padding: 2px; border-radius: 6px;">
+                        <option>ALL TYPES</option>
+                        <th:block th:each="facilityType : ${facilityTypes}">
+                            <option th:value="${facilityType}" th:text="${facilityType}"></option>
+                        </th:block>
+                    </select>
+                </label>
+            </th:block>
 
             <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
             <a id="goToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>

@@ -22,8 +22,16 @@ public class Review {
     public Review() {
     }
 
-    public Review(float rating, String comment) {
+    public Review(float rating, String comment, Facility facility) {
         this.rating = rating;
         this.comment = comment;
+        this.facility = facility;
+    }
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ";rating=" + rating +
+                ";comment=" + comment;
     }
 }

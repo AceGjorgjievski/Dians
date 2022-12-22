@@ -41,16 +41,32 @@ body {
 }
 
 #stars {
-    display: flex;
-    gap: 6px;
+    position: relative;
     background: #161616;
 
-    padding-block: 6px;
-    padding-inline: 12px;
     border-radius: 6px;
 
     width: fit-content;
+}
+
+#yellowStars, #whiteStars, #noReviewsYet {
+    display: flex;
+    gap: 6px;
+
+    padding-block: 6px;
+    padding-inline: 12px;
     margin-inline: auto;
+}
+
+#yellowStars {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+}
+
+#whiteStars {
+    position: relative;
+    inset: 0;
 }
 
 .star {
@@ -61,6 +77,14 @@ body {
     width: 20px;
     height: 20px;
     background: yellow;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.whiteStar>div {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    opacity: .4;
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 

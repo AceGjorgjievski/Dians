@@ -1,10 +1,7 @@
 package com.example.diansspring.model;
 
 import com.example.diansspring.model.enums.FacilityType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -69,5 +66,19 @@ public class Facility {
                             FacilityType.valueOf(arr[3].toUpperCase()),
                             Float.parseFloat(arr[4]),
                             Float.parseFloat(arr[5]));
+    }
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                "|name=" + name +
+                "|address=" + address +
+                "|facilityType=" + facilityType +
+                "|municipality=" + municipality +
+                "|reviews=" + reviews +
+                "|reviewRatingsCount=" + reviewRatingsCount +
+                "|reviewRatingsAverage=" + reviewRatingsAverage +
+                "|longitude=" + longitude +
+                "|latitude=" + latitude;
     }
 }

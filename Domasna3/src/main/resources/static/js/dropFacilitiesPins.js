@@ -29,17 +29,18 @@ function dropFacilitiesPins() {
 
                 GLOBALS.profiles.clickedFacility = GLOBALS.facilities[i];
 
+                GLOBALS.facilities[i].options.marker.closePopup();
+
                 document.getElementById('markerPopupFacilityName').innerHTML = GLOBALS.facilities[i].name;
                 if (GLOBALS.facilities[i].reviewRatingsCount === 0) {
                     document.getElementById('noReviewsYet').style.display = 'block';
-
-                    let stars = document.querySelectorAll('.star');
-                    for (let star of stars) {
-                        star.style.display = 'none';
-                    }
+                    document.getElementById('yellowStars').style.display = 'none';
+                    document.getElementById('whiteStars').style.display = 'none';
                 }
                 else {
                     document.getElementById('noReviewsYet').style.display = 'none';
+                    document.getElementById('yellowStars').style.display = 'flex';
+                    document.getElementById('whiteStars').style.display = 'flex';
 
                     const average = GLOBALS.facilities[i].reviewRatingsAverage;
                     let percentageAverage = (average / 5.0) * 100;
@@ -72,7 +73,6 @@ function dropFacilitiesPins() {
                         starIdx++;
                     }
                 }
-                GLOBALS.facilities[i].options.marker.closePopup();
 
                 document.getElementById('drawRouteToFacility').style.display = 'block';
 

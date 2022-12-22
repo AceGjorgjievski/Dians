@@ -2,8 +2,12 @@
 
 <script th:inline="javascript">
     var GLOBALS = {};
-    GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
-    GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
+
+    /*<![CDATA[*/
+        GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
+        GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
+    /*]]>*/
+
     GLOBALS.profiles = {};
 
     document.documentElement.style.setProperty('--starPartial', '0');
@@ -13,11 +17,20 @@
     <h2 id="markerPopupFacilityName" style="text-align: center;">--Facility Name--</h2>
     <div id="stars">
         <div id="noReviewsYet" style="color: white;"><i>This place is still not rated.</i></div>
-        <div class="star"><div></div></div>
-        <div class="star"><div></div></div>
-        <div class="star"><div></div></div>
-        <div class="star"><div></div></div>
-        <div class="star"><div></div></div>
+        <div id="yellowStars">
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+        </div>
+        <div id="whiteStars">
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+        </div>
     </div>
 </div>
 

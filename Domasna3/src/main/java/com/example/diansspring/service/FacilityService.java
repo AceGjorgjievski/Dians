@@ -10,4 +10,5 @@ public interface FacilityService {
     List<Facility> listAll();
     void save(Facility facility);
 
+    Facility findById(Long id);
 }
