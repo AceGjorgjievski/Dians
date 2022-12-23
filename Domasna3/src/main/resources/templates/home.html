@@ -13,18 +13,18 @@
     document.documentElement.style.setProperty('--starPartial', '0');
 </script>
 
-<div id="markerClickPopup">
-    <h2 id="markerPopupFacilityName" style="text-align: center;">--Facility Name--</h2>
-    <div id="stars">
-        <div id="noReviewsYet" style="color: white;"><i>This place is still not rated.</i></div>
-        <div id="yellowStars">
+<div class="markerClickPopup" style="width: 300px;">
+    <h2 class="markerPopupFacilityName" style="text-align: center;">--Facility Name--</h2>
+    <div class="stars">
+        <div class="noReviewsYet" style="color: white;"><i>This place is still not rated.</i></div>
+        <div class="yellowStars">
             <div class="star"><div></div></div>
             <div class="star"><div></div></div>
             <div class="star"><div></div></div>
             <div class="star"><div></div></div>
             <div class="star"><div></div></div>
         </div>
-        <div id="whiteStars">
+        <div class="whiteStars">
             <div class="whiteStar"><div></div></div>
             <div class="whiteStar"><div></div></div>
             <div class="whiteStar"><div></div></div>
@@ -34,8 +34,4 @@
     </div>
 </div>
 
-<script src="js/createDropPinIcons.js"></script>
-<script src="js/drawInitialMap.js"></script>
-<script src="js/geolocation.js"></script>
-<script src="js/dropFacilitiesPins.js"></script>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>

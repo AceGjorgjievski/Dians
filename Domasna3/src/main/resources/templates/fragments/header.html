@@ -11,9 +11,9 @@
             <th:block th:if="${facilityTypes != undefined}">
                 <label>
                     <select id="filterByFacilityType" style="margin-right: 6px; padding: 2px; border-radius: 6px;">
-                        <option>ALL TYPES</option>
+                        <option value="ALL_TYPES">ALL TYPES</option>
                         <th:block th:each="facilityType : ${facilityTypes}">
-                            <option th:value="${facilityType}" th:text="${facilityType}"></option>
+                            <option th:value="${facilityType}" th:text="${facilityType.replaceAll('_', ' ')}"></option>
                         </th:block>
                     </select>
                 </label>

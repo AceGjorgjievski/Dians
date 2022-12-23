@@ -1,35 +1,12 @@
-function bindPopupsToMarkers() {
-    for (let i = 0; i < GLOBALS.facilities.length; i++) {
-        GLOBALS.facilities[i].options.marker.bindPopup(document.getElementById('markerClickPopup'));
-    }
-}
-bindPopupsToMarkers();
+import { manageDropPinIcons } from "./manageMapItems/manageDropPinIcons.js";
+import { bindPopupsToMarkers } from "./manageMapItems/manageMarkerPopups.js";
 
-// Filter based on facility type
-function hideThoseNotInChosenFacilityType() {
-    for (let i = 0; i < GLOBALS.facilities.length; i++) {
-        if (GLOBALS.facilities[i].facilityType !== GLOBALS.profiles.filterByFacilityType) {
-            GLOBALS.facilities[i]?.options?.marker?.setOpacity(0);
-        }
-        else {
-            GLOBALS.facilities[i]?.options?.marker?.setOpacity(1);
-        }
-    }
-}
+import { drawInitialMap } from "./drawInitialMap.js";
+import { drawMap } from "./drawMap.js";
 
-function showAll() {
-    for (let i = 0; i < GLOBALS.facilities.length; i++) {
-        GLOBALS.facilities[i]?.options?.marker?.setOpacity(1);
-    }
-}
+import "./domElementsEvents/headerElementsEvents.js";
 
-document.getElementById('filterByFacilityType').addEventListener('change', function() {
-    GLOBALS.profiles.filterByFacilityType = document.getElementById('filterByFacilityType').value;
+manageDropPinIcons();
 
-    if (GLOBALS.profiles.filterByFacilityType === "ALL TYPES") {
-        showAll();
-    }
-    else {
-        hideThoseNotInChosenFacilityType();
-    }
-});
+drawInitialMap();
+await drawMap();

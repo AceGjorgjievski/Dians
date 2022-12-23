@@ -1,4 +1,4 @@
-function dropFacilitiesPins() {
+export function dropFacilitiesPins() {
     for (let i = 0; i < GLOBALS.facilities.length; i++) {
         GLOBALS.facilities[i].options = {
             marker: L.marker([GLOBALS.facilities[i].latitude, GLOBALS.facilities[i].longitude]).addTo(GLOBALS.map),
@@ -6,7 +6,7 @@ function dropFacilitiesPins() {
         }
 
         GLOBALS.facilities[i].options.marker.setIcon(GLOBALS.redIcon);
-        GLOBALS.facilities[i].options.marker.addEventListener('click', function () {
+        GLOBALS.facilities[i].options.marker.addEventListener('keydown', function () {
             if (!GLOBALS.facilities[i].options.clicked) {
                 if (GLOBALS.profiles.clickedFacility !== undefined) {
                     GLOBALS.profiles.clickedFacility.options.clicked = false;
@@ -29,50 +29,7 @@ function dropFacilitiesPins() {
 
                 GLOBALS.profiles.clickedFacility = GLOBALS.facilities[i];
 
-                GLOBALS.facilities[i].options.marker.closePopup();
 
-                document.getElementById('markerPopupFacilityName').innerHTML = GLOBALS.facilities[i].name;
-                if (GLOBALS.facilities[i].reviewRatingsCount === 0) {
-                    document.getElementById('noReviewsYet').style.display = 'block';
-                    document.getElementById('yellowStars').style.display = 'none';
-                    document.getElementById('whiteStars').style.display = 'none';
-                }
-                else {
-                    document.getElementById('noReviewsYet').style.display = 'none';
-                    document.getElementById('yellowStars').style.display = 'flex';
-                    document.getElementById('whiteStars').style.display = 'flex';
-
-                    const average = GLOBALS.facilities[i].reviewRatingsAverage;
-                    let percentageAverage = (average / 5.0) * 100;
-                    let fillStars = [];
-                    for (let i = 0; i < 5; i++) {
-                        fillStars.push(percentageAverage);
-                        percentageAverage -= 20;
-                    }
-
-                    let stars = document.querySelectorAll('.star');
-                    let starIdx = 0;
-                    for (let star of stars) {
-                        star.style.display = 'block';
-                        star.classList.remove('star-full', 'star-partial', 'star-empty');
-
-                        if (fillStars[starIdx] >= 20) {
-                            star.classList.add('star-full');
-                        }
-                        else if (fillStars[starIdx] <= 0) {
-                            star.classList.add('star-empty');
-                        }
-                        else {
-                            star.classList.add('star-partial');
-                            let percentageOfStar = (fillStars[starIdx] / 20.0) * 100;
-                            let pixelsOfStar = (percentageOfStar / 100.0) * 20;
-
-                            document.documentElement.style.setProperty('--starPartial', pixelsOfStar + 'px');
-                        }
-
-                        starIdx++;
-                    }
-                }
 
                 document.getElementById('drawRouteToFacility').style.display = 'block';
 
@@ -100,12 +57,5 @@ function dropFacilitiesPins() {
                 }
             }
         });
-    }
-}
-dropFacilitiesPins();
-
-function showAll() {
-    for (let i = 0; i < GLOBALS.facilities.length; i++) {
-        GLOBALS.facilities[i]?.options?.marker?.setOpacity(1);
     }
 }
