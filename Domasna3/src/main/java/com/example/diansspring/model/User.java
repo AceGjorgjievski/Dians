@@ -35,10 +35,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String niceName;
 
-    @Column(nullable = false)
-    @DateTimeFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
-    private LocalDateTime accountCreationDate;
-
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -54,11 +50,15 @@ public class User implements UserDetails {
     @Transient
     private String realCaptcha;
 
+    @Column(nullable = false)
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreated;
 
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateUpdated;
+
+    @ManyToMany
+    private List<Facility> favouriteFacilities;
 
     public User() {
     }
@@ -68,11 +68,11 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.niceName = niceName;
-        this.accountCreationDate = LocalDateTime.now();
         this.role = Role.ROLE_USER;
         this.reviews = new ArrayList<>();
         this.dateCreated = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
+        this.favouriteFacilities = new ArrayList<>();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

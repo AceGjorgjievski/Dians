@@ -39,6 +39,9 @@ public class Facility {
 
     private int discount;
 
+    @ManyToMany(mappedBy = "favouriteFacilities")
+    private List<User> favouritedByUsers;
+
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateAdded;
 
@@ -72,11 +75,11 @@ public class Facility {
     public static Facility create(String str) {
         String[] arr = str.split(", ");
         return new Facility(Long.parseLong(arr[0]),
-                            arr[1],
-                            arr[2],
-                            FacilityType.valueOf(arr[3].toUpperCase()),
-                            Float.parseFloat(arr[4]),
-                            Float.parseFloat(arr[5]),
-                            Integer.parseInt(arr[6]));
+                arr[1],
+                arr[2],
+                FacilityType.valueOf(arr[3].toUpperCase()),
+                Float.parseFloat(arr[4]),
+                Float.parseFloat(arr[5]),
+                Integer.parseInt(arr[6]));
     }
 }
