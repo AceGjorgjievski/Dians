@@ -18,7 +18,12 @@ export function openPopup() {
 }
 
 function setPopupContent() {
-    for (let elem of document.getElementsByClassName('markerPopupFacilityName')) elem.innerHTML = GLOBALS.profiles.clickedFacility.name;
+    for (let elem of document.getElementsByClassName('markerPopupFacilityName')) elem.innerHTML = GLOBALS.profiles.clickedFacility?.name;
+
+    let textForMarkerPopupFacilityType = GLOBALS.profiles.clickedFacility?.facilityType?.replaceAll("_", " ");
+    if (parseInt(GLOBALS.profiles.clickedFacility?.discount) !== 0) textForMarkerPopupFacilityType += " - Up to " + GLOBALS.profiles.clickedFacility.discount + "% discounts!";
+    for (let elem of document.getElementsByClassName('markerPopupFacilityType')) elem.innerHTML = textForMarkerPopupFacilityType;
+
     if (GLOBALS.profiles.clickedFacility.reviewRatingsCount === 0) {
         for (let elem of document.getElementsByClassName('noReviewsYet')) elem.style.display = 'block';
         for (let elem of document.getElementsByClassName('yellowStars')) elem.style.display = 'none';

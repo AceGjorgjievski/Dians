@@ -24,8 +24,6 @@ public class Facility {
     @Column(nullable = false)
     private FacilityType facilityType;
 
-    private String municipality;
-
     @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
@@ -38,6 +36,8 @@ public class Facility {
 
     @Column(nullable = false)
     private float latitude;
+
+    private int discount;
 
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateAdded;
@@ -53,14 +53,15 @@ public class Facility {
                     String address,
                     FacilityType facilityType,
                     float latitude,
-                    float longitude) {
+                    float longitude,
+                    int discount) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.facilityType = facilityType;
-        this.municipality = "";
         this.latitude = latitude;
         this.longitude = longitude;
+        this.discount = discount;
         this.reviews = new ArrayList<>();
         this.reviewRatingsCount = 0;
         this.reviewRatingsAverage = 0;
@@ -75,6 +76,7 @@ public class Facility {
                             arr[2],
                             FacilityType.valueOf(arr[3].toUpperCase()),
                             Float.parseFloat(arr[4]),
-                            Float.parseFloat(arr[5]));
+                            Float.parseFloat(arr[5]),
+                            Integer.parseInt(arr[6]));
     }
 }

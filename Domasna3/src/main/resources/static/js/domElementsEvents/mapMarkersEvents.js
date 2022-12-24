@@ -6,13 +6,13 @@ export function addMarkerClickEvent(facility) {
     facility.options.marker.addEventListener('click', async () => {
         if (facility.options.marker.getIcon() == GLOBALS.redIcon) {
             if (GLOBALS.profiles.clickedFacility !== undefined) {
-                unclickMarker();
+                await unclickMarker();
             }
 
             clickMarker(facility);
         }
         else {
-            unclickMarker();
+            await unclickMarker();
         }
 
         await drawMap();

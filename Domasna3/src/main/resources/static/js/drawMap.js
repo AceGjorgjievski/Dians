@@ -81,7 +81,7 @@ async function manageRouteDrawing() {
         document.getElementById('buttonManageDrawRoute').innerHTML = "Remove route!";
     }
     else {
-        removeRoute();
+        await removeRoute();
         document.getElementById('buttonManageDrawRoute').innerHTML = "Draw route!";
     }
 }
@@ -107,8 +107,8 @@ async function removeOldRequisites() {
 
     if (check1 && check2) return;
 
-    unclickMarker();
-    removeRoute();
+    await unclickMarker();
+    await removeRoute();
 }
 
 function removeOldMarkers() {
