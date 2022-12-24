@@ -1,4 +1,6 @@
 import { openPopup } from "../manageMapItems/manageMarkerPopups.js";
+import { drawMap } from "../drawMap.js";
+import { removeRoute } from "../manageMapItems/manageDrawnRoute.js";
 
 export function addMarkerClickEvent(facility) {
     facility.options.marker.addEventListener('click', async () => {
@@ -12,6 +14,8 @@ export function addMarkerClickEvent(facility) {
         else {
             unclickMarker();
         }
+
+        await drawMap();
     })
 }
 
@@ -24,6 +28,8 @@ function clickMarker(facility) {
 
 export function unclickMarker() {
     if (GLOBALS.profiles.clickedFacility !== undefined) {
+        removeRoute();
+
         GLOBALS.profiles.clickedFacility.options.marker.setIcon(GLOBALS.redIcon);
         GLOBALS.profiles.clickedFacility = undefined;
     }

@@ -1,11 +1,11 @@
 import { goToMyLocationIfNeeded } from "../geolocation.js";
-import { drawMap } from "../drawMap.js";
 
 export async function drawRoute() {
     await goToMyLocationIfNeeded()
 
     if (GLOBALS.profiles.drawnRoute !== undefined) {
         GLOBALS.profiles.drawnRoute.remove();
+        GLOBALS.profiles.doDrawRoute = false;
     }
 
     let start = [GLOBALS?.current?.lat, GLOBALS?.current?.lng];
@@ -23,16 +23,16 @@ export async function drawRoute() {
 
             GLOBALS.profiles.drawnRoute = L.polyline(coordinates, {color: 'green', weight: 6});
             GLOBALS.profiles.drawnRoute.addTo(GLOBALS.map);
-            GLOBALS.map.fitBounds(GLOBALS.profiles.drawnRoute.getBounds());
 
             GLOBALS.profiles.doDrawRoute = true;
-            await drawMap();
         });
 }
 
-export async function removeRoute() {
+export function removeRoute() {
     if (GLOBALS.profiles.drawnRoute !== undefined) {
         GLOBALS.profiles.drawnRoute.remove();
+        GLOBALS.profiles.drawnRoute = undefined;
+
+        GLOBALS.profiles.doDrawRoute = false;
     }
-    GLOBALS.profiles.doDrawRoute = false;
 }

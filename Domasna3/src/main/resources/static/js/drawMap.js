@@ -1,10 +1,10 @@
 import {
-    checkIfAnotherFacilityIsClicked,
+    checkIfRouteIsDrawnToAnotherFacility,
     checkIfFilterByFacilityTypeMatching,
-    checkIfInChosenDistanceRadius
+    checkIfInChosenDistanceRadius,
 } from "./checks.js";
-import {createCircle, removeCircle} from "./manageMapItems/manageChosenDistanceCircle.js";
-import { drawRoute } from "./manageMapItems/manageDrawnRoute.js";
+import { createCircle, removeCircle } from "./manageMapItems/manageChosenDistanceCircle.js";
+import { drawRoute, removeRoute } from "./manageMapItems/manageDrawnRoute.js";
 import { goToMyLocationIfNeeded } from "./geolocation.js";
 import { addMarkerClickEvent, unclickMarker } from "./domElementsEvents/mapMarkersEvents.js";
 import { bindPopupsToMarkers } from "./manageMapItems/manageMarkerPopups.js";
@@ -19,6 +19,8 @@ export async function drawMap() {
 
 function setDefaultGlobalsProfile() {
     GLOBALS.profiles.distanceRadius = GLOBALS.profiles.distanceRadius ?? 0;
+    GLOBALS.profiles.doDrawRoute = GLOBALS.profiles.doDrawRoute ?? false;
+
     GLOBALS.profiles.filterByFacilityType = GLOBALS.profiles.filterByFacilityType ?? "ALL_TYPES";
     GLOBALS.profiles.clickedFacility = GLOBALS.profiles.clickedFacility ?? undefined;
 
@@ -43,7 +45,7 @@ async function drawFacilities(options = {}) {
 
         if (!checkIfFilterByFacilityTypeMatching(current)) continue;
 
-        // if (checkIfAnotherFacilityIsClicked(current)) continue;
+        if (checkIfRouteIsDrawnToAnotherFacility(current)) continue;
 
         drawFacility(current);
     }
@@ -54,13 +56,7 @@ async function drawFacilities(options = {}) {
 async function drawRequisites() {
     manageCircleDrawing();
 
-    if (GLOBALS.profiles.doDrawRoute) {
-        await drawRoute();
-        document.getElementById('buttonManageDrawRoute').innerHTML = "Draw route!";
-    }
-    else {
-        document.getElementById('buttonManageDrawRoute').innerHTML = "Remove route!";
-    }
+    await manageRouteDrawing();
 }
 
 function manageCircleDrawing() {
@@ -71,6 +67,24 @@ function manageCircleDrawing() {
     else {
         removeCircle();
         document.getElementById('buttonManageDistanceRadius').innerHTML = "Limit!";
+    }
+}
+
+async function manageRouteDrawing() {
+    if (GLOBALS.profiles.clickedFacility !== undefined) {
+        document.getElementById('buttonManageDrawRoute').style.display = "block";
+    }
+    else {
+        document.getElementById('buttonManageDrawRoute').style.display = "none";
+    }
+
+    if (GLOBALS.profiles.doDrawRoute !== false) {
+        await drawRoute();
+        document.getElementById('buttonManageDrawRoute').innerHTML = "Remove route!";
+    }
+    else {
+        removeRoute();
+        document.getElementById('buttonManageDrawRoute').innerHTML = "Draw route!";
     }
 }
 

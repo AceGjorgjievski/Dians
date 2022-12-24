@@ -10,8 +10,8 @@ export function checkIfFilterByFacilityTypeMatching(facility) {
     return true;
 }
 
-export function checkIfAnotherFacilityIsClicked(facility) {
-    if (GLOBALS.profiles.clickedFacility !== undefined && GLOBALS.profiles.clickedFacility !== facility) {
+export function checkIfRouteIsDrawnToAnotherFacility(facility) {
+    if (GLOBALS.profiles.drawnRoute !== undefined && GLOBALS.profiles.clickedFacility !== facility) {
         return true;
     }
 
