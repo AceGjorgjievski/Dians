@@ -13,13 +13,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig {
-    private final PasswordEncoder passwordEncoder;
     private final CustomUsernamePasswordAuthenticationProvider authenticationProvider;
 
-    public WebSecurityConfig(PasswordEncoder passwordEncoder, CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
-        this.passwordEncoder = passwordEncoder;
+    public WebSecurityConfig(CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
     }
 
