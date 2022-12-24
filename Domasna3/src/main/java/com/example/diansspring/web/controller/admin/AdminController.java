@@ -16,7 +16,9 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/admin")
@@ -73,8 +75,11 @@ public class AdminController {
 
         String inputLine = null;
         try {
+            Random rand = new Random();
+            List<Integer> allowedRandoms = new ArrayList<>(Arrays.asList(0, 10, 15, 25));
             while ((inputLine = bufferedReader.readLine()) != null) {
-                facilitiesInputData.add(inputLine);
+                int discount = allowedRandoms.get(rand.nextInt(4));
+                facilitiesInputData.add(inputLine + ", " + discount);
             }
         } catch (IOException e) {
             e.printStackTrace();

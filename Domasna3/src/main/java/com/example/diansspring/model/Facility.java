@@ -1,12 +1,11 @@
 package com.example.diansspring.model;
 
 import com.example.diansspring.model.enums.FacilityType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,22 +24,26 @@ public class Facility {
     @Column(nullable = false)
     private FacilityType facilityType;
 
-    private String municipality;
-
     @OneToMany(mappedBy = "facility")
     private List<Review> reviews;
 
-    private double reviewRatingsSum;
-
     private int reviewRatingsCount;
 
-    private int reviewRatingsAverage;
+    private float reviewRatingsAverage;
 
     @Column(nullable = false)
     private float longitude;
 
     @Column(nullable = false)
     private float latitude;
+
+    private int discount;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateAdded;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateUpdated;
 
     public Facility() {
     }
@@ -50,18 +53,20 @@ public class Facility {
                     String address,
                     FacilityType facilityType,
                     float latitude,
-                    float longitude) {
+                    float longitude,
+                    int discount) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.facilityType = facilityType;
-        this.municipality = "";
         this.latitude = latitude;
         this.longitude = longitude;
+        this.discount = discount;
         this.reviews = new ArrayList<>();
-        this.reviewRatingsSum = 0;
         this.reviewRatingsCount = 0;
         this.reviewRatingsAverage = 0;
+        this.dateAdded = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 
     public static Facility create(String str) {
@@ -71,6 +76,7 @@ public class Facility {
                             arr[2],
                             FacilityType.valueOf(arr[3].toUpperCase()),
                             Float.parseFloat(arr[4]),
-                            Float.parseFloat(arr[5]));
+                            Float.parseFloat(arr[5]),
+                            Integer.parseInt(arr[6]));
     }
 }

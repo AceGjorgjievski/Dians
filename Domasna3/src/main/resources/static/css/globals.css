@@ -2,6 +2,11 @@
 @import "globals/form.css";
 @import "globals/footer.css";
 
+html, body {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -25,7 +30,7 @@ body {
 }
 
 #mapdiv {
-    height: 90vh;
+    height: 100vh;
 }
 
 .button--footer {
@@ -38,4 +43,90 @@ body {
 .button--primary {
     background-color: #161616 !important;
     color: white !important;
+}
+
+.stars {
+    position: relative;
+    background: #161616;
+
+    border-radius: 6px;
+
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.yellowStars, .whiteStars, .noReviewsYet {
+    display: flex;
+    gap: 6px;
+
+    padding-block: 6px;
+    padding-inline: 12px;
+    margin-inline: auto;
+}
+
+.yellowStars {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+}
+
+.whiteStars {
+    position: relative;
+    inset: 0;
+}
+
+.star {
+    overflow: hidden;
+}
+
+.star>div {
+    width: 20px;
+    height: 20px;
+    background: yellow;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.whiteStar>div {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    opacity: .4;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-partial {
+    width: var(--starPartial);
+}
+
+.star-empty {
+    width: 0px;
+}
+
+.leaflet-control-zoom {
+    top: 100px;
+}
+
+.routePopup>div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.customPopup p, .customPopup h2 {
+    margin-block: 2px !important;
+}
+
+.markerPopupFacilityType {
+    text-align: center;
+    width: fit-content;
+    margin-inline: auto !important;
+    margin-top: .8rem !important;
+
+    font-size: 10px;
+
+    border-radius: 6px;
+
+    padding: 2px 8px;
+    background-color: #e6e6fa66;
+    color: black;
 }

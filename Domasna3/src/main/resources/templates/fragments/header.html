@@ -8,10 +8,23 @@
         </div>
 
         <div class="header-right" style="display: flex; align-items: center;">
+            <th:block th:if="${facilityTypes != undefined}">
+                <label>
+                    <select id="filterByFacilityType" style="margin-right: 6px; padding: 2px; border-radius: 6px;">
+                        <option value="ALL_TYPES">ALL TYPES</option>
+                        <th:block th:each="facilityType : ${facilityTypes}">
+                            <option th:value="${facilityType}" th:text="${facilityType.replaceAll('_', ' ')}"></option>
+                        </th:block>
+                    </select>
+                </label>
+            </th:block>
 
             <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
-            <a id="goToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
-            <a id="shareMyLocation" style="cursor: pointer;"><i class="fas fa-location-arrow"></i></a>
+
+            <th:block th:if="${mainBodyContent == 'home'}">
+                <a id="goToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
+                <a id="shareMyLocation" style="cursor: pointer;"><i class="fas fa-location-arrow"></i></a>
+            </th:block>
 
             <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
             <a sec:authorize="isAuthenticated()" href="/logout"><i class="fas fa-sign-out-alt"></i></a>

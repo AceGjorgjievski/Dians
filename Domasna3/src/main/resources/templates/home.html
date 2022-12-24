@@ -2,13 +2,52 @@
 
 <script th:inline="javascript">
     var GLOBALS = {};
-    GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
-    GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
+
+    /*<![CDATA[*/
+        GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
+        GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
+    /*]]>*/
+
     GLOBALS.profiles = {};
+
+    document.documentElement.style.setProperty('--starPartial', '0');
 </script>
 
-<script src="js/createDropPinIcons.js"></script>
-<script src="js/drawInitialMap.js"></script>
-<script src="js/geolocation.js"></script>
-<script src="js/dropFacilitiesPins.js"></script>
-<script src="js/main.js"></script>
+<div class="customPopup markerClickPopup" style="width: 300px;">
+    <p class="markerPopupFacilityType">--Facility Type--</p>
+    <h2 class="markerPopupFacilityName" style="text-align: center; margin-bottom: 1.6rem !important;">--Facility Name--</h2>
+    <div class="stars">
+        <div class="noReviewsYet" style="color: white; font-size: 12px;">This place is still not rated.</div>
+        <div class="yellowStars">
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+            <div class="star"><div></div></div>
+        </div>
+        <div class="whiteStars">
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+            <div class="whiteStar"><div></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="customPopup routePopup">
+    <div>
+        <p><strong>Destination:</strong></p>
+        <p class="routeDestination"></p>
+    </div>
+    <div>
+        <p><strong>Distance:</strong></p>
+        <p class="routeDistance"></p>
+    </div>
+    <div>
+        <p><strong>Walking time:</strong></p>
+        <p class="routeWalkingTime"></p>
+    </div>
+</div>
+
+<script type="module" src="js/main.js"></script>

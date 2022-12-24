@@ -2,6 +2,11 @@
     overflow: hidden;
     background-color: #161616;
     padding: 20px 10px;
+
+    position: fixed;
+    inset: 0 0 auto 0;
+
+    z-index: 500;
 }
 
 .header a {

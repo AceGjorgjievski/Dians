@@ -3,6 +3,7 @@
     <head>
 
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title th:text="${pageTitle}">Findify</title>
 
@@ -26,11 +27,11 @@
 
         <header th:replace="fragments/header"></header>
 
-        <th:block  th:if="${mainBodyContent == 'home'}">
+        <th:block th:if="${mainBodyContent == 'home'}">
             <footer th:replace="fragments/footer"></footer>
         </th:block>
 
-        <section th:include="${mainBodyContent}"></section>
+        <section style="margin-top: 100px;" th:include="${mainBodyContent}"></section>
 
     </body>
 </html>

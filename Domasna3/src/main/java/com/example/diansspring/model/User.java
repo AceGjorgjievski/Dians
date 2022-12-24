@@ -8,8 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,6 +42,9 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Review> reviews;
+
     @Transient
     private String captcha;
 
@@ -48,6 +53,12 @@ public class User implements UserDetails {
 
     @Transient
     private String realCaptcha;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateCreated;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateUpdated;
 
     public User() {
     }
@@ -59,6 +70,9 @@ public class User implements UserDetails {
         this.niceName = niceName;
         this.accountCreationDate = LocalDateTime.now();
         this.role = Role.ROLE_USER;
+        this.reviews = new ArrayList<>();
+        this.dateCreated = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
