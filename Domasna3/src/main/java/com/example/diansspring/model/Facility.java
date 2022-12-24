@@ -3,7 +3,9 @@ package com.example.diansspring.model;
 import com.example.diansspring.model.enums.FacilityType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,12 @@ public class Facility {
     @Column(nullable = false)
     private float latitude;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateAdded;
+
+    @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime dateUpdated;
+
     public Facility() {
     }
 
@@ -56,6 +64,8 @@ public class Facility {
         this.reviews = new ArrayList<>();
         this.reviewRatingsCount = 0;
         this.reviewRatingsAverage = 0;
+        this.dateAdded = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 
     public static Facility create(String str) {
@@ -66,19 +76,5 @@ public class Facility {
                             FacilityType.valueOf(arr[3].toUpperCase()),
                             Float.parseFloat(arr[4]),
                             Float.parseFloat(arr[5]));
-    }
-
-    @Override
-    public String toString() {
-        return  "id=" + id +
-                "|name=" + name +
-                "|address=" + address +
-                "|facilityType=" + facilityType +
-                "|municipality=" + municipality +
-                "|reviews=" + reviews +
-                "|reviewRatingsCount=" + reviewRatingsCount +
-                "|reviewRatingsAverage=" + reviewRatingsAverage +
-                "|longitude=" + longitude +
-                "|latitude=" + latitude;
     }
 }
