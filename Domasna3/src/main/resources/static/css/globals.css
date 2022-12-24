@@ -130,3 +130,14 @@ body {
     background-color: #e6e6fa66;
     color: black;
 }
+
+.markerPopupFavouriteButton {
+    font-size: 24px;
+    color: #ff000033;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.markerPopupFavouriteButton:hover {
+    color: #ff000088;
+}

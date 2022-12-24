@@ -39,7 +39,7 @@ public class WebSecurityConfig {
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .deleteCookies("FINDIFY_COOKIE")
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/home")
                 )
                 .exceptionHandling((exception) -> exception
                         .accessDeniedPage("/access-denied")

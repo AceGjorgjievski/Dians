@@ -24,6 +24,28 @@ function setPopupContent() {
     if (parseInt(GLOBALS.profiles.clickedFacility?.discount) !== 0) textForMarkerPopupFacilityType += " - Up to " + GLOBALS.profiles.clickedFacility.discount + "% discounts!";
     for (let elem of document.getElementsByClassName('markerPopupFacilityType')) elem.innerHTML = textForMarkerPopupFacilityType;
 
+    for (let elem of document.getElementsByClassName('markerPopupFavouriteButton')) {
+        elem.setAttribute('facility-id', GLOBALS.profiles.clickedFacility?.id);
+
+        elem.addEventListener('click', () => {
+            $.ajax({
+                type: "POST",
+                url: "/favourites/add",
+                data: {
+                    facilityId: elem.getAttribute('facility-id'),
+                },
+                success: function(success) {
+                    if (success) {
+                        elem.style.color = "#ff0000";
+                    }
+                },
+                fail: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        })
+    }
+
     if (GLOBALS.profiles.clickedFacility.reviewRatingsCount === 0) {
         for (let elem of document.getElementsByClassName('noReviewsYet')) elem.style.display = 'block';
         for (let elem of document.getElementsByClassName('yellowStars')) elem.style.display = 'none';
