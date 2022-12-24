@@ -1,3 +1,5 @@
+import { drawMap } from "../drawMap.js";
+
 export function bindPopupsToMarkers() {
     for (let i = 0; i < GLOBALS.facilities.length; i++) {
         GLOBALS.facilities[i].options.marker.bindPopup(GLOBALS.profiles.defaultPopup);
@@ -27,6 +29,13 @@ function setPopupContent() {
     for (let elem of document.getElementsByClassName('markerPopupFavouriteButton')) {
         elem.setAttribute('facility-id', GLOBALS.profiles.clickedFacility?.id);
 
+        if (GLOBALS.favourites?.map(e => e.id.toString()).includes(elem.getAttribute('facility-id'))) {
+            elem.style.color = "#ff0000";
+        }
+        else {
+            elem.style.color = "#ff000033";
+        }
+
         elem.addEventListener('click', () => {
             $.ajax({
                 type: "POST",
@@ -34,9 +43,10 @@ function setPopupContent() {
                 data: {
                     facilityId: elem.getAttribute('facility-id'),
                 },
-                success: function(success) {
-                    if (success) {
-                        elem.style.color = "#ff0000";
+                success: async function(data) {
+                    if (data) {
+                        GLOBALS.favourites = data;
+                        await drawMap();
                     }
                 },
                 fail: function(xhr, status, error) {

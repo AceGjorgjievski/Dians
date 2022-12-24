@@ -20,7 +20,13 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public List<Facility> listAll() {
-        return this.facilityRepository.findAll().stream().peek(e -> e.setReviews(e.getReviews().stream().peek(r -> r.setFacility(null)).collect(Collectors.toList()))).collect(Collectors.toList());
+        return this.facilityRepository.findAll().stream().peek(e -> {
+            e.setReviews(e.getReviews().stream().peek(r -> {
+                r.setFacility(null);
+            }).collect(Collectors.toList()));
+        }).collect(Collectors.toList()).stream().peek(e -> {
+            e.setFavouritedByUsers(null);
+        }).collect(Collectors.toList());
     }
 
     @Override

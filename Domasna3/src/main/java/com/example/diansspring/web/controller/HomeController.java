@@ -5,8 +5,10 @@ import com.example.diansspring.model.MapCoordinates;
 import com.example.diansspring.model.enums.FacilityType;
 import com.example.diansspring.service.FacilityService;
 import com.example.diansspring.service.ReviewService;
+import com.example.diansspring.service.UserService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -22,11 +25,13 @@ import java.util.stream.Collectors;
 public class HomeController {
 
     private final FacilityService facilityService;
+    private final UserService userService;
     private final ReviewService reviewService;
 
-    public HomeController(FacilityService facilityService, ReviewService reviewService) {
+    public HomeController(FacilityService facilityService, ReviewService reviewService, UserService userService) {
         this.facilityService = facilityService;
         this.reviewService = reviewService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -49,6 +54,11 @@ public class HomeController {
 
         model.addAttribute("facilities", this.facilityService.listAll());
         model.addAttribute("facilityTypes", Arrays.stream(FacilityType.values()).map(FacilityType::name).collect(Collectors.toList()));
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!Objects.equals(username, "anonymousUser")) {
+            model.addAttribute("favourites", this.userService.findByUsername(username).getFavouriteFacilities());
+        }
 
         model.addAttribute("mapCoordinates", new MapCoordinates(lat, lng, zoom));
 

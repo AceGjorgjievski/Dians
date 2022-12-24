@@ -70,6 +70,7 @@ public class Facility {
         this.reviewRatingsAverage = 0;
         this.dateAdded = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
+        this.favouritedByUsers = new ArrayList<>();
     }
 
     public static Facility create(String str) {
@@ -81,5 +82,22 @@ public class Facility {
                 Float.parseFloat(arr[4]),
                 Float.parseFloat(arr[5]),
                 Integer.parseInt(arr[6]));
+    }
+
+    @Override
+    public String toString() {
+        return "Facility{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", facilityType=" + facilityType +
+                ", reviewRatingsCount=" + reviewRatingsCount +
+                ", reviewRatingsAverage=" + reviewRatingsAverage +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", discount=" + discount +
+                ", dateAdded=" + dateAdded +
+                ", dateUpdated=" + dateUpdated +
+                '}';
     }
 }
