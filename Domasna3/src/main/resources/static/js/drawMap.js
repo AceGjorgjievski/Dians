@@ -39,7 +39,7 @@ async function drawFacilities(options = {}) {
     for (let i = 0; i < GLOBALS.facilities.length; i++) {
         let current = GLOBALS.facilities[i];
 
-        if (GLOBALS.profiles.distanceRadius !== 0 && !await checkIfInChosenDistanceRadius(current, 1400)) continue;
+        if (GLOBALS.profiles.distanceRadius !== 0 && !await checkIfInChosenDistanceRadius(current, GLOBALS.profiles.distanceRadius)) continue;
 
         if (!checkIfFilterByFacilityTypeMatching(current)) continue;
 
@@ -59,12 +59,12 @@ async function drawRequisites() {
 
 function manageCircleDrawing() {
     if (GLOBALS.profiles.distanceRadius !== 0) {
-        createCircle(1400);
-        document.getElementById('buttonManageDistanceRadius').innerHTML = "Stop limiting!";
+        createCircle(GLOBALS.profiles.distanceRadius);
+        document.getElementById('buttonManageDistanceRadius').innerHTML = "Turn off 'Near me'";
     }
     else {
         removeCircle();
-        document.getElementById('buttonManageDistanceRadius').innerHTML = "Limit!";
+        document.getElementById('buttonManageDistanceRadius').innerHTML = "Near me";
     }
 }
 
@@ -78,11 +78,11 @@ async function manageRouteDrawing() {
 
     if (GLOBALS.profiles.doDrawRoute !== false) {
         await drawRoute();
-        document.getElementById('buttonManageDrawRoute').innerHTML = "Remove route!";
+        document.getElementById('buttonManageDrawRoute').innerHTML = "Turn off 'Directions'";
     }
     else {
         await removeRoute();
-        document.getElementById('buttonManageDrawRoute').innerHTML = "Draw route!";
+        document.getElementById('buttonManageDrawRoute').innerHTML = "Directions";
     }
 }
 
@@ -102,7 +102,7 @@ function drawFacility(current) {
 }
 
 async function removeOldRequisites() {
-    const check1 = await checkIfInChosenDistanceRadius(GLOBALS.profiles.clickedFacility, 1400);
+    const check1 = await checkIfInChosenDistanceRadius(GLOBALS.profiles.clickedFacility, GLOBALS.profiles.distanceRadius);
     const check2 = checkIfFilterByFacilityTypeMatching(GLOBALS.profiles.clickedFacility);
 
     if (check1 && check2) return;

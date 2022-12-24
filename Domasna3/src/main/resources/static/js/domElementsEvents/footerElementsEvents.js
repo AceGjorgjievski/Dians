@@ -5,7 +5,14 @@ document.getElementById('buttonManageDistanceRadius').addEventListener('click', 
     GLOBALS.profiles.distanceRadius = GLOBALS.profiles.distanceRadius ?? 0;
 
     if (GLOBALS.profiles.distanceRadius === 0) {
-        GLOBALS.profiles.distanceRadius = 1400;
+        try {
+            const answer = parseInt(prompt("At what distance (in meters) near you should we show facilities?"));
+            if (isNaN(answer) || answer <= 0) throw "Exception";
+
+            GLOBALS.profiles.distanceRadius = answer;
+        } catch (e) {
+            alert('Invalid value. It should be a positive whole number.');
+        }
     } else {
         GLOBALS.profiles.distanceRadius = 0;
     }
