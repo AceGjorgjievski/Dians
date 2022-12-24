@@ -101,3 +101,17 @@ body {
 .star-empty {
     width: 0px;
 }
+
+.leaflet-control-zoom {
+    top: 100px;
+}
+
+.routePopup>div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.routePopup p {
+    margin-block: 2px !important;
+}
