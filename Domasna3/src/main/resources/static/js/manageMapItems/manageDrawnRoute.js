@@ -1,4 +1,5 @@
 import { goToMyLocationIfNeeded } from "../geolocation.js";
+import { drawMap } from "../drawMap.js";
 
 export async function drawRoute() {
     await goToMyLocationIfNeeded()
@@ -10,6 +11,8 @@ export async function drawRoute() {
 
     let start = [GLOBALS?.current?.lat, GLOBALS?.current?.lng];
     let end = [GLOBALS?.profiles?.clickedFacility?.latitude, GLOBALS?.profiles?.clickedFacility?.longitude];
+
+    if (start[0] === undefined || end[0] === undefined) return;
 
     await fetch('https://graphhopper.com/api/1/route?key=00b41045-4a0c-4f26-8cbe-7cbd3bac986e&vehicle=foot&points_encoded=false&point=' + start[0] + ',' + start[1] + '&point=' + end[0] + ',' + end[1])
         .then(function (response) {
@@ -30,12 +33,14 @@ export async function drawRoute() {
         });
 }
 
-export function removeRoute() {
+export async function removeRoute() {
     if (GLOBALS.profiles.drawnRoute !== undefined) {
         GLOBALS.profiles.drawnRoute.remove();
         GLOBALS.profiles.drawnRoute = undefined;
 
         GLOBALS.profiles.doDrawRoute = false;
+
+        await drawMap();
     }
 }
 
@@ -52,6 +57,6 @@ function bindPopupToRoute(distanceInMeters, walkingTimeInMs) {
         GLOBALS.profiles.drawnRoute.bindPopup(document.getElementsByClassName('routePopup')[0]?.outerHTML).openPopup();
         for (let elem of document.getElementsByClassName('routeDestination')) elem.innerHTML = GLOBALS.profiles.clickedFacility.name;
         for (let elem of document.getElementsByClassName('routeDistance')) elem.innerHTML = distanceInKm.toFixed(2) + ' km';
-        for (let elem of document.getElementsByClassName('routeWalkingTime')) elem.innerHTML = walkingTimeInMinutes.toFixed(2) + ' min';
+        for (let elem of document.getElementsByClassName('routeWalkingTime')) elem.innerHTML = walkingTimeInMinutes.toFixed(0) + ' min';
     }
 }

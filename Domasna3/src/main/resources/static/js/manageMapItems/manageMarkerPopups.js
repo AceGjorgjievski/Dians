@@ -10,8 +10,10 @@ export function bindPopupsToMarkers() {
 
 export function openPopup() {
     setTimeout(() => {
-        GLOBALS.profiles.clickedFacility.options.marker.openPopup();
-        setPopupContent();
+        if (GLOBALS.profiles.clickedFacility !== undefined) {
+            GLOBALS.profiles.clickedFacility.options.marker.openPopup();
+            setPopupContent();
+        }
     }, 10);
 }
 

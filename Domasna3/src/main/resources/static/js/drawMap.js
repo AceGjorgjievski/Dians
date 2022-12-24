@@ -30,11 +30,9 @@ function setDefaultGlobalsProfile() {
 async function drawFacilities(options = {}) {
     if (GLOBALS.profiles.distanceRadius !== 0) {
         await goToMyLocationIfNeeded();
-
-        if (!await checkIfInChosenDistanceRadius(GLOBALS.profiles.clickedFacility, 1400)) {
-            unclickMarker();
-        }
     }
+
+    await removeOldRequisites();
 
     removeOldMarkers();
 
@@ -101,6 +99,16 @@ function drawFacility(current) {
     }
 
     addMarkerClickEvent(current);
+}
+
+async function removeOldRequisites() {
+    const check1 = await checkIfInChosenDistanceRadius(GLOBALS.profiles.clickedFacility, 1400);
+    const check2 = checkIfFilterByFacilityTypeMatching(GLOBALS.profiles.clickedFacility);
+
+    if (check1 && check2) return;
+
+    unclickMarker();
+    removeRoute();
 }
 
 function removeOldMarkers() {

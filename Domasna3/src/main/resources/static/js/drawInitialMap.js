@@ -6,9 +6,9 @@ export function drawInitialMap() {
         style: "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
     }
 
-    if (GLOBALS.mapCoordinatesFromUrl.lat !== -1) GLOBALS.defaultOptions.lat = GLOBALS.mapCoordinatesFromUrl.lat;
-    if (GLOBALS.mapCoordinatesFromUrl.lng !== -1) GLOBALS.defaultOptions.lng = GLOBALS.mapCoordinatesFromUrl.lng;
-    if (GLOBALS.mapCoordinatesFromUrl.zoom !== -1) GLOBALS.defaultOptions.zoom = GLOBALS.mapCoordinatesFromUrl.zoom;
+    if (GLOBALS.mapCoordinatesFromUrl?.lat !== -1) GLOBALS.defaultOptions.lat = GLOBALS.mapCoordinatesFromUrl.lat;
+    if (GLOBALS.mapCoordinatesFromUrl?.lng !== -1) GLOBALS.defaultOptions.lng = GLOBALS.mapCoordinatesFromUrl.lng;
+    if (GLOBALS.mapCoordinatesFromUrl?.zoom !== -1) GLOBALS.defaultOptions.zoom = GLOBALS.mapCoordinatesFromUrl.zoom;
 
     drawMapWithLeaflet();
 
@@ -28,7 +28,8 @@ function drawMapWithLeaflet() {
 
 function drawYellowMarkerIfSharedLocation() {
     if (GLOBALS?.mapCoordinatesFromUrl?.lat !== -1 && GLOBALS?.mapCoordinatesFromUrl?.lng !== -1) {
-        GLOBALS.profiles.markerOnSharedLocation = L.marker([GLOBALS.mapCoordinatesFromUrl.lat, GLOBALS.mapCoordinatesFromUrl.lng], GLOBALS.initialOptions.zoom).addTo(GLOBALS.map);
+        GLOBALS.profiles.markerOnSharedLocation = L.marker([GLOBALS.mapCoordinatesFromUrl.lat, GLOBALS.mapCoordinatesFromUrl.lng], GLOBALS.defaultOptions.zoom).addTo(GLOBALS.map);
         GLOBALS.profiles.markerOnSharedLocation.setIcon(GLOBALS.yellowIcon);
+        GLOBALS.profiles.markerOnSharedLocation.bindPopup("Someone shared this location with you.").openPopup();
     }
 }

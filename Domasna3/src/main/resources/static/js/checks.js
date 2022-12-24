@@ -1,6 +1,8 @@
 import { goToMyLocationIfNeeded } from "./geolocation.js";
 
 export function checkIfFilterByFacilityTypeMatching(facility) {
+    if (facility === undefined) return true;
+
     if (GLOBALS.profiles.filterByFacilityType !== "ALL_TYPES") {
         if (facility.facilityType !== GLOBALS.profiles.filterByFacilityType) {
             return false;
@@ -19,7 +21,7 @@ export function checkIfRouteIsDrawnToAnotherFacility(facility) {
 }
 
 export async function checkIfInChosenDistanceRadius(facility, maximumDistanceRadiusInMeters) {
-    if (facility === undefined) return true;
+    if (facility === undefined || GLOBALS.profiles.distanceRadius === 0) return true;
 
     await goToMyLocationIfNeeded()
 

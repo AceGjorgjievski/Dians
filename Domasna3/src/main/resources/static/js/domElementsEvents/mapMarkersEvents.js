@@ -26,11 +26,11 @@ function clickMarker(facility) {
     openPopup();
 }
 
-export function unclickMarker() {
+export async function unclickMarker() {
     if (GLOBALS.profiles.clickedFacility !== undefined) {
-        removeRoute();
-
         GLOBALS.profiles.clickedFacility.options.marker.setIcon(GLOBALS.redIcon);
         GLOBALS.profiles.clickedFacility = undefined;
     }
+
+    await removeRoute();
 }
