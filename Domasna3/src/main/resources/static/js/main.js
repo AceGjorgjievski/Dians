@@ -5,6 +5,7 @@ import { drawMap } from "./drawMap.js";
 
 import "./domElementsEvents/headerElementsEvents.js";
 import "./domElementsEvents/footerElementsEvents.js";
+import "./domElementsEvents/sideElementsEvents.js";
 
 manageDropPinIcons();
 

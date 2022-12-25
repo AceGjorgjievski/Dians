@@ -19,8 +19,14 @@ export function openPopup() {
     }, 10);
 }
 
-function setPopupContent() {
-    for (let elem of document.getElementsByClassName('markerPopupFacilityName')) elem.innerHTML = GLOBALS.profiles.clickedFacility?.name;
+export function setPopupContent(options = {}) {
+    GLOBALS.facilityItemInfo = options;
+
+    if (GLOBALS.facilityItemInfo.facility === undefined) GLOBALS.facilityItemInfo.facility = GLOBALS.profiles.clickedFacility;
+    if (GLOBALS.facilityItemInfo.classNamePrefix === undefined) GLOBALS.facilityItemInfo.classNamePrefix = "markerPopup";
+    if (GLOBALS.facilityItemInfo.parent === undefined) GLOBALS.facilityItemInfo.parent = document;
+
+    for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'FacilityName')) elem.innerHTML = GLOBALS.facilityItemInfo.facility?.name;
 
     manageFacilityTypeAndDiscount();
 
@@ -32,14 +38,14 @@ function setPopupContent() {
 }
 
 function manageFacilityTypeAndDiscount() {
-    let textForMarkerPopupFacilityType = GLOBALS.profiles.clickedFacility?.facilityType?.replaceAll("_", " ");
-    if (parseInt(GLOBALS.profiles.clickedFacility?.discount) !== 0) textForMarkerPopupFacilityType += " - Up to " + GLOBALS.profiles.clickedFacility.discount + "% discounts!";
-    for (let elem of document.getElementsByClassName('markerPopupFacilityType')) elem.innerHTML = textForMarkerPopupFacilityType;
+    let textForMarkerPopupFacilityType = GLOBALS.facilityItemInfo.facility?.facilityType?.replaceAll("_", " ");
+    if (parseInt(GLOBALS.facilityItemInfo.facility?.discount) !== 0) textForMarkerPopupFacilityType += " - Up to " + GLOBALS.facilityItemInfo.facility.discount + "% discounts!";
+    for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'FacilityType')) elem.innerHTML = textForMarkerPopupFacilityType;
 }
 
 function manageFavouriteButton() {
-    for (let elem of document.getElementsByClassName('markerPopupFavouriteButton')) {
-        elem.setAttribute('facility-id', GLOBALS.profiles.clickedFacility?.id);
+    for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'FavouriteButton')) {
+        elem.setAttribute('facility-id', GLOBALS.facilityItemInfo.facility?.id);
 
         if (GLOBALS.favourites?.map(e => e?.id?.toString()).includes(elem.getAttribute('facility-id'))) {
             elem.classList.add('favourited');
@@ -70,8 +76,8 @@ function manageFavouriteButton() {
 }
 
 function manageReviewed() {
-    for (let elem of document.getElementsByClassName('markerPopupReviewButton')) {
-        elem.setAttribute('facility-id', GLOBALS.profiles.clickedFacility?.id);
+    for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'ReviewButton')) {
+        elem.setAttribute('facility-id', GLOBALS.facilityItemInfo.facility?.id);
 
         if (GLOBALS.reviewed?.map(e => e?.facility?.id?.toString()).includes(elem.getAttribute('facility-id'))) {
             elem.classList.add('reviewed');
@@ -116,7 +122,7 @@ function manageReviewed() {
                                             options: GLOBALS.facilities[i].options
                                         }
                                     }
-                                    GLOBALS.profiles.clickedFacility = GLOBALS.facilities.filter(e => e.id === GLOBALS.profiles.clickedFacility.id)[0];
+                                    GLOBALS.facilityItemInfo.facility = GLOBALS.facilities.filter(e => e.id === GLOBALS.facilityItemInfo.facility.id)[0];
                                     await drawMap();
                                 }
                             },
@@ -137,18 +143,18 @@ function manageReviewed() {
 }
 
 function manageReviews() {
-    if (GLOBALS.profiles.clickedFacility.reviewRatingsCount === 0) {
-        for (let elem of document.getElementsByClassName('noReviewsYet')) elem.style.display = 'block';
-        for (let elem of document.getElementsByClassName('yellowStars')) elem.style.display = 'none';
-        for (let elem of document.getElementsByClassName('whiteStars')) elem.style.display = 'none';
+    if (GLOBALS.facilityItemInfo.facility.reviewRatingsCount === 0) {
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'NoReviewsYet')) elem.style.display = 'block';
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'YellowStars')) elem.style.display = 'none';
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'WhiteStars')) elem.style.display = 'none';
     }
     else {
-        for (let elem of document.getElementsByClassName('noReviewsYet')) elem.style.display = 'none';
-        for (let elem of document.getElementsByClassName('yellowStars')) elem.style.display = 'flex';
-        for (let elem of document.getElementsByClassName('whiteStars')) elem.style.display = 'flex';
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'NoReviewsYet')) elem.style.display = 'none';
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'YellowStars')) elem.style.display = 'flex';
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'WhiteStars')) elem.style.display = 'flex';
 
-        for (let elem of document.getElementsByClassName('markerClickPopup')) {
-            const average = GLOBALS.profiles.clickedFacility.reviewRatingsAverage;
+        for (let elem of GLOBALS.facilityItemInfo.parent.getElementsByClassName(GLOBALS.facilityItemInfo.classNamePrefix + 'Container')) {
+            const average = GLOBALS.facilityItemInfo.facility.reviewRatingsAverage;
             let percentageAverage = (average / 5.0) * 100;
             let fillStars = [];
             for (let i = 0; i < 5; i++) {
@@ -164,16 +170,18 @@ function manageReviews() {
 
                 if (fillStars[starIdx] >= 20) {
                     star.classList.add('star-full');
+                    star.style.width = 20 + 'px';
                 }
                 else if (fillStars[starIdx] <= 0) {
                     star.classList.add('star-empty');
+                    star.style.width = 0 + 'px';
                 }
                 else {
                     star.classList.add('star-partial');
                     let percentageOfStar = (fillStars[starIdx] / 20.0) * 100;
                     let pixelsOfStar = (percentageOfStar / 100.0) * 20;
 
-                    document.documentElement.style.setProperty('--starPartial', pixelsOfStar + 'px');
+                    star.style.width = pixelsOfStar + 'px';
                 }
 
                 starIdx++;
