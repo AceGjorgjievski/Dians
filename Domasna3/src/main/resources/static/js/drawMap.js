@@ -54,7 +54,7 @@ async function drawFacilities(options = {}) {
 }
 
 function drawSideFacilitiesList() {
-    let facilitiesSortedByRating = GLOBALS.facilities.sort((a, b) => b.rating - a.rating);
+    let facilitiesSortedByRating = GLOBALS.facilities.sort((a, b) => b.reviewRatingsAverage - a.reviewRatingsAverage);
 
     if (GLOBALS.profiles.showFavouritesOnly) {
         facilitiesSortedByRating = facilitiesSortedByRating.filter(e => GLOBALS.favourites.map(f => f.id).includes(e.id));
