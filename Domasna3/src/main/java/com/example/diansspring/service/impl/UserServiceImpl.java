@@ -98,7 +98,9 @@ public class UserServiceImpl implements UserService {
         Review newReview = new Review((float) review, "", facility, user);
         if (userReviews.stream().filter(e -> Objects.equals(e.getFacility(), facility)).toList().size() > 0) {
             Review oldReview = this.reviewService.findByUserAndFacility(user, facility);
-            facility.setReviewRatingsAverage((facility.getReviewRatingsAverage()*facility.getReviewRatingsCount()-oldReview.getRating())/(facility.getReviewRatingsCount()-1));
+
+            if (facility.getReviewRatingsCount()-1 == 0) facility.setReviewRatingsAverage(0);
+            else facility.setReviewRatingsAverage((facility.getReviewRatingsAverage()*facility.getReviewRatingsCount()-oldReview.getRating())/(facility.getReviewRatingsCount()-1));
             facility.setReviewRatingsCount(facility.getReviewRatingsCount()-1);
 
             newReview.setId(oldReview.getId());
