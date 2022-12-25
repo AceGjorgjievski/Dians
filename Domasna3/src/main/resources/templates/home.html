@@ -1,53 +1,100 @@
-<div id="mapdiv"></div>
+<th:block xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div id="mapdiv"></div>
 
-<script th:inline="javascript">
-    var GLOBALS = {};
+    <script th:inline="javascript">
+        var GLOBALS = {};
 
-    /*<![CDATA[*/
-        GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
-        GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
-    /*]]>*/
+        /*<![CDATA[*/
+            GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
+            GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
+            GLOBALS.favourites = /*[[${favourites}]]*/ "Favourites";
+            GLOBALS.reviewed = /*[[${reviewed}]]*/ "Reviewed";
+        /*]]>*/
 
-    GLOBALS.profiles = {};
+        GLOBALS.profiles = {};
 
-    document.documentElement.style.setProperty('--starPartial', '0');
-</script>
+        document.documentElement.style.setProperty('--starPartial', '0');
+    </script>
 
-<div class="customPopup markerClickPopup" style="width: 300px;">
-    <p class="markerPopupFacilityType">--Facility Type--</p>
-    <h2 class="markerPopupFacilityName" style="text-align: center; margin-bottom: 1.6rem !important;">--Facility Name--</h2>
-    <div class="stars">
-        <div class="noReviewsYet" style="color: white; font-size: 12px;">This place is still not rated.</div>
-        <div class="yellowStars">
-            <div class="star"><div></div></div>
-            <div class="star"><div></div></div>
-            <div class="star"><div></div></div>
-            <div class="star"><div></div></div>
-            <div class="star"><div></div></div>
-        </div>
-        <div class="whiteStars">
-            <div class="whiteStar"><div></div></div>
-            <div class="whiteStar"><div></div></div>
-            <div class="whiteStar"><div></div></div>
-            <div class="whiteStar"><div></div></div>
-            <div class="whiteStar"><div></div></div>
+    <div class="facilitiesListFixedContainer">
+        <div class="sideFacilitiesContainer">
+            <div sec:authorize="isAuthenticated()" id="buttonShowFavouritesOnly">
+                <i id="iconShowFavouritesOnly" class="iconShowFavouritesOnly fa fa-heart"></i>
+            </div>
+            <div class="facilitiesListContainer">
+
+            </div>
         </div>
     </div>
-</div>
 
-<div class="customPopup routePopup">
-    <div>
-        <p><strong>Destination:</strong></p>
-        <p class="routeDestination"></p>
+    <div class="facilitiesListItemTemplate">
+        <div class="infoFacility facilitiesListItemContainer">
+            <p class="facilitiesListItemFacilityType infoFacilityType">--Facility Type--</p>
+            <div style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-inline: auto; margin-bottom: 1.6rem !important;">
+                <h2 class="facilitiesListItemFacilityName infoFacilityName" style="text-align: center;">--Facility Name--</h2>
+                <i sec:authorize="isAuthenticated()" class="facilitiesListItemFavouriteButton infoFavouriteButton fas fa-heart"></i>
+                <i sec:authorize="isAuthenticated()" class="facilitiesListItemReviewButton infoReviewButton fa fa-star"></i>
+            </div>
+            <div class="stars">
+                <div class="noReviewsYet facilitiesListItemNoReviewsYet" style="color: white; font-size: 12px;">This place is still not rated.</div>
+                <div class="yellowStars facilitiesListItemYellowStars">
+                    <div class="star"><div></div></div>
+                    <div class="star"><div></div></div>
+                    <div class="star"><div></div></div>
+                    <div class="star"><div></div></div>
+                    <div class="star"><div></div></div>
+                </div>
+                <div class="whiteStars facilitiesListItemWhiteStars">
+                    <div class="whiteStar"><div></div></div>
+                    <div class="whiteStar"><div></div></div>
+                    <div class="whiteStar"><div></div></div>
+                    <div class="whiteStar"><div></div></div>
+                    <div class="whiteStar"><div></div></div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <p><strong>Distance:</strong></p>
-        <p class="routeDistance"></p>
+
+    <div class="customPopup markerClickPopup markerPopupContainer" style="width: 300px;">
+        <p class="markerPopupFacilityType infoFacilityType">--Facility Type--</p>
+        <div style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-inline: auto; margin-bottom: 1.6rem !important;">
+            <h2 class="markerPopupFacilityName infoFacilityName" style="text-align: center;">--Facility Name--</h2>
+            <i sec:authorize="isAuthenticated()" class="markerPopupFavouriteButton infoFavouriteButton fas fa-heart"></i>
+            <i sec:authorize="isAuthenticated()" class="markerPopupReviewButton infoReviewButton fa fa-star"></i>
+        </div>
+        <div class="stars">
+            <div class="noReviewsYet markerPopupNoReviewsYet" style="color: white; font-size: 12px;">This place is still not rated.</div>
+            <div class="yellowStars markerPopupYellowStars">
+                <div class="star"><div></div></div>
+                <div class="star"><div></div></div>
+                <div class="star"><div></div></div>
+                <div class="star"><div></div></div>
+                <div class="star"><div></div></div>
+            </div>
+            <div class="whiteStars markerPopupWhiteStars">
+                <div class="whiteStar"><div></div></div>
+                <div class="whiteStar"><div></div></div>
+                <div class="whiteStar"><div></div></div>
+                <div class="whiteStar"><div></div></div>
+                <div class="whiteStar"><div></div></div>
+            </div>
+        </div>
     </div>
-    <div>
-        <p><strong>Walking time:</strong></p>
-        <p class="routeWalkingTime"></p>
+
+    <div class="customPopup routePopup">
+        <div>
+            <p><strong>Destination:</strong></p>
+            <p class="routeDestination"></p>
+        </div>
+        <div>
+            <p><strong>Distance:</strong></p>
+            <p class="routeDistance"></p>
+        </div>
+        <div>
+            <p><strong>Walking time:</strong></p>
+            <p class="routeWalkingTime"></p>
+        </div>
     </div>
-</div>
+</th:block>
 
 <script type="module" src="js/main.js"></script>

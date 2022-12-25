@@ -98,4 +98,24 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", niceName='" + niceName + '\'' +
+                ", role=" + role +
+                ", captcha='" + captcha + '\'' +
+                ", hiddenCaptcha='" + hiddenCaptcha + '\'' +
+                ", realCaptcha='" + realCaptcha + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                '}';
+    }
 }

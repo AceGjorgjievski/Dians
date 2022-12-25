@@ -1,6 +1,7 @@
 package com.example.diansspring.model;
 
 import com.example.diansspring.model.enums.FacilityType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,7 @@ public class Facility {
     private FacilityType facilityType;
 
     @OneToMany(mappedBy = "facility")
+    @JsonIgnore
     private List<Review> reviews;
 
     private int reviewRatingsCount;
@@ -40,6 +42,7 @@ public class Facility {
     private int discount;
 
     @ManyToMany(mappedBy = "favouriteFacilities")
+    @JsonIgnore
     private List<User> favouritedByUsers;
 
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -70,6 +73,7 @@ public class Facility {
         this.reviewRatingsAverage = 0;
         this.dateAdded = LocalDateTime.now();
         this.dateUpdated = LocalDateTime.now();
+        this.favouritedByUsers = new ArrayList<>();
     }
 
     public static Facility create(String str) {
@@ -81,5 +85,22 @@ public class Facility {
                 Float.parseFloat(arr[4]),
                 Float.parseFloat(arr[5]),
                 Integer.parseInt(arr[6]));
+    }
+
+    @Override
+    public String toString() {
+        return "Facility{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", facilityType=" + facilityType +
+                ", reviewRatingsCount=" + reviewRatingsCount +
+                ", reviewRatingsAverage=" + reviewRatingsAverage +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", discount=" + discount +
+                ", dateAdded=" + dateAdded +
+                ", dateUpdated=" + dateUpdated +
+                '}';
     }
 }

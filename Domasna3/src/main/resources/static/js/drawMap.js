@@ -7,12 +7,14 @@ import { createCircle, removeCircle } from "./manageMapItems/manageChosenDistanc
 import { drawRoute, removeRoute } from "./manageMapItems/manageDrawnRoute.js";
 import { goToMyLocationIfNeeded } from "./geolocation.js";
 import { addMarkerClickEvent, unclickMarker } from "./domElementsEvents/mapMarkersEvents.js";
-import { bindPopupsToMarkers } from "./manageMapItems/manageMarkerPopups.js";
+import { bindPopupsToMarkers, setPopupContent } from "./manageMapItems/manageMarkerPopups.js";
 
 export async function drawMap() {
     setDefaultGlobalsProfile();
 
     await drawFacilities();
+
+    drawSideFacilitiesList();
 
     await drawRequisites();
 }
@@ -49,6 +51,41 @@ async function drawFacilities(options = {}) {
     }
 
     bindPopupsToMarkers();
+}
+
+function drawSideFacilitiesList() {
+    let facilitiesSortedByRating = GLOBALS.facilities.sort((a, b) => b.rating - a.rating);
+
+    if (GLOBALS.profiles.showFavouritesOnly) {
+        facilitiesSortedByRating = facilitiesSortedByRating.filter(e => GLOBALS.favourites.map(f => f.id).includes(e.id));
+    }
+
+    let parent = document.getElementsByClassName("facilitiesListContainer")[0];
+    while (parent.firstChild) {
+        parent.firstChild.remove();
+    }
+
+    for (let i = 0; i < facilitiesSortedByRating.length; i++) {
+        let current = facilitiesSortedByRating[i];
+
+        let facilitiesListItem = document.createElement('div');
+        parent.appendChild(facilitiesListItem);
+
+        facilitiesListItem.innerHTML = document.getElementsByClassName("facilitiesListItemTemplate")[0].innerHTML;
+        facilitiesListItem.className = document.getElementsByClassName("facilitiesListItemTemplate")[0].className;
+        facilitiesListItem.setAttribute('data-facility-id', current.id);
+    }
+
+    for (let elem of document.getElementsByClassName("facilitiesListItemTemplate")) {
+        const facilityId = elem.getAttribute("data-facility-id");
+        if (facilityId !== null) {
+            setPopupContent({
+                facility: GLOBALS.facilities.filter(e => e.id.toString() === facilityId)[0],
+                classNamePrefix: "facilitiesListItem",
+                parent: elem
+            })
+        }
+    }
 }
 
 async function drawRequisites() {

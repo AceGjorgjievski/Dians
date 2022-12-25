@@ -1,5 +1,5 @@
-<header xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-    <div class="header" style="display: flex; align-items: center; justify-content: space-between">
+<header class="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <div style="display: flex; align-items: center; justify-content: space-between">
         <div style="display: flex; align-items: center;">
             <a href="/home" style="display: block; height: 4rem; aspect-ratio: 1; padding: 0;">
                 <img src="images/logo-black.jpg" alt="Findify logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"/>
@@ -31,7 +31,7 @@
 
             <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"><i class="fas fa-user-shield"></i></a>
 
-            <a sec:authorize="!isAuthenticated()" href="/logout"><i class="fas fa-sign-in-alt"></i></a>
+            <a sec:authorize="!isAuthenticated()" href="/login"><i class="fas fa-sign-in-alt"></i></a>
         </div>
     </div>
 </header>

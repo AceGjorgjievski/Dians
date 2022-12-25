@@ -1,11 +1,13 @@
 package com.example.diansspring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -19,6 +21,7 @@ public class Review {
     private Facility facility;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @Column(nullable = false)
