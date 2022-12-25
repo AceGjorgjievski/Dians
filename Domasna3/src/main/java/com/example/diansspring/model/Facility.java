@@ -1,6 +1,7 @@
 package com.example.diansspring.model;
 
 import com.example.diansspring.model.enums.FacilityType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,6 +26,7 @@ public class Facility {
     private FacilityType facilityType;
 
     @OneToMany(mappedBy = "facility")
+    @JsonIgnore
     private List<Review> reviews;
 
     private int reviewRatingsCount;
@@ -40,6 +42,7 @@ public class Facility {
     private int discount;
 
     @ManyToMany(mappedBy = "favouriteFacilities")
+    @JsonIgnore
     private List<User> favouritedByUsers;
 
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")

@@ -3,7 +3,6 @@
 @import "globals/footer.css";
 
 html, body {
-    max-height: 100vh;
     overflow: hidden;
 }
 
@@ -102,10 +101,6 @@ body {
     width: 0px;
 }
 
-.leaflet-control-zoom {
-    top: 100px;
-}
-
 .routePopup>div {
     display: flex;
     align-items: center;
@@ -140,4 +135,23 @@ body {
 
 .markerPopupFavouriteButton:hover {
     color: #ff000088;
+}
+
+.favourited {
+    color: #ff0000;
+}
+
+.markerPopupReviewButton {
+    font-size: 24px;
+    color: #ffc10766;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.markerPopupReviewButton:hover {
+    color: #ffc107aa;
+}
+
+.reviewed {
+    color: #ffc107;
 }

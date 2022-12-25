@@ -8,6 +8,7 @@
             GLOBALS.facilities = /*[[${facilities}]]*/ "Facilities";
             GLOBALS.mapCoordinatesFromUrl = /*[[${mapCoordinates}]]*/ "Map Coordinates From Url";
             GLOBALS.favourites = /*[[${favourites}]]*/ "Favourites";
+            GLOBALS.reviewed = /*[[${reviewed}]]*/ "Reviewed";
         /*]]>*/
 
         GLOBALS.profiles = {};
@@ -20,6 +21,7 @@
         <div style="display: flex; gap: 12px; justify-content: center; align-items: center; margin-inline: auto; margin-bottom: 1.6rem !important;">
             <h2 class="markerPopupFacilityName" style="text-align: center;">--Facility Name--</h2>
             <i sec:authorize="isAuthenticated()" class="markerPopupFavouriteButton fas fa-heart"></i>
+            <i sec:authorize="isAuthenticated()" class="markerPopupReviewButton fa fa-star"></i>
         </div>
         <div class="stars">
             <div class="noReviewsYet" style="color: white; font-size: 12px;">This place is still not rated.</div>

@@ -1,10 +1,8 @@
-package com.example.diansspring.web.controller;
+package com.example.diansspring.web.controller.rest;
 
 import com.example.diansspring.model.Facility;
-import com.example.diansspring.model.User;
 import com.example.diansspring.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class FavouritesController {
     }
 
     @PostMapping("/add")
-    public List<Facility> addToFavourites(@RequestParam Long facilityId) {
+    public List<Facility> updateFavouritesList(@RequestParam Long facilityId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (Objects.equals(username, "anonymousUser")) return null;
 

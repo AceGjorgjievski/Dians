@@ -39,18 +39,7 @@ public class HomeController {
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
 
-        if (this.facilityService.listAll().size() == 0) {
-            // Set the headers
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            // Create the request entity
-            HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
-
-            // Send the request and get the response
-            ResponseEntity<String> response = new RestTemplate().exchange(
-                    "http://localhost:9091/admin/update-facilities-in-database", HttpMethod.POST, requestEntity, String.class);
-        }
+        if (this.facilityService.listAll().size() == 0) initializeFacilities();
 
         model.addAttribute("facilities", this.facilityService.listAll());
         model.addAttribute("facilityTypes", Arrays.stream(FacilityType.values()).map(FacilityType::name).collect(Collectors.toList()));
@@ -58,10 +47,21 @@ public class HomeController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!Objects.equals(username, "anonymousUser")) {
             model.addAttribute("favourites", this.userService.findByUsername(username).getFavouriteFacilities());
+            model.addAttribute("reviewed", this.userService.findByUsername(username).getReviews());
         }
 
         model.addAttribute("mapCoordinates", new MapCoordinates(lat, lng, zoom));
 
         return "master-template";
+    }
+
+    private void initializeFacilities() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+
+        ResponseEntity<String> response = new RestTemplate().exchange(
+                "http://localhost:9091/admin/update-facilities-in-database", HttpMethod.POST, requestEntity, String.class);
     }
 }
