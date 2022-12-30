@@ -6,6 +6,7 @@ import com.example.diansspring.model.enums.FacilityType;
 import com.example.diansspring.service.FacilityService;
 import com.example.diansspring.service.ReviewService;
 import com.example.diansspring.service.UserService;
+import com.example.diansspring.service.configuration.ConfigurationService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,16 +27,18 @@ public class HomeController {
 
     private final FacilityService facilityService;
     private final UserService userService;
-    private final ReviewService reviewService;
+    private final ConfigurationService configurationService;
 
-    public HomeController(FacilityService facilityService, ReviewService reviewService, UserService userService) {
+    public HomeController(FacilityService facilityService, UserService userService, ConfigurationService configurationService) {
         this.facilityService = facilityService;
-        this.reviewService = reviewService;
         this.userService = userService;
+        this.configurationService = configurationService;
     }
 
     @GetMapping
     public String getHomePage(@RequestParam(required = false) Float lat, @RequestParam(required = false) Float lng, @RequestParam(required = false) Float zoom, Model model) {
+        System.out.println(this.configurationService.getBaseUrl());
+
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
 
@@ -62,6 +65,10 @@ public class HomeController {
         HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
 
         ResponseEntity<String> response = new RestTemplate().exchange(
-                "http://localhost:9091/admin/update-facilities-in-database", HttpMethod.POST, requestEntity, String.class);
+            this.configurationService.getBaseUrl() + "/admin/update-facilities-in-database",
+            HttpMethod.POST,
+            requestEntity,
+            String.class
+        );
     }
 }
