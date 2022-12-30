@@ -20,7 +20,7 @@
     border-radius: 4px;
 }
 
-.header a.logo {
+.header a.logo-text {
     font-size: 25px;
     font-weight: bold;
 }
@@ -39,7 +39,11 @@
     float: right;
 }
 
-@media screen and (max-width: 500px) {
+.logo {
+    height: 4rem;
+}
+
+@media (max-width: 540px) {
     .header a {
         float: none;
         display: block;
@@ -48,5 +52,36 @@
 
     .header-right {
         float: none;
+    }
+
+    .hideOnMobile {
+        display: none !important;
+    }
+
+    .header {
+        padding: 20px 10px 10px 10px;
+    }
+
+    .logo {
+        height: 2rem;
+    }
+
+    .header a {
+        padding-block: .25rem;
+    }
+
+    .header a.logo-text {
+        font-size: 18px;
+        padding-inline: 8px;
+    }
+
+    .headerIcons {
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 540px) {
+    .hideOnDesktop {
+        display: none !important;
     }
 }

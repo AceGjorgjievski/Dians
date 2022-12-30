@@ -2,10 +2,6 @@
 @import "globals/form.css";
 @import "globals/footer.css";
 
-html, body {
-    overflow: hidden;
-}
-
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -160,6 +156,16 @@ body {
     background-color: #161616;
     color: white;
     z-index: 450;
+}
+
+@media (max-width: 540px) {
+    .facilitiesListFixedContainer {
+        display: none;
+    }
+
+    #mapdiv {
+        margin-left: 0;
+    }
 }
 
 .sideFacilitiesContainer {

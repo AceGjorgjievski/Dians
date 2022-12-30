@@ -11,3 +11,6 @@ manageDropPinIcons();
 
 drawInitialMap();
 await drawMap();
+
+document.documentElement.style.overflow = "hidden";
+document.querySelector('body').style.overflow = "hidden";

@@ -6,7 +6,15 @@
     padding: 10px;
 }
 
-form {border: none}
+@media (max-width: 540px) {
+    .center {
+        width: 100%;
+    }
+}
+
+form {
+    border: none;
+}
 
 input[type=text], input[type=password], input[type=email] {
     width: 100%;

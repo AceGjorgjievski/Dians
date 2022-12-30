@@ -1,5 +1,3 @@
-import { drawMap } from "./drawMap.js";
-
 async function getLocation() {
     if (navigator.geolocation) {
         return new Promise((resolve, reject) =>
@@ -35,16 +33,18 @@ export async function goToMyLocationIfNeeded() {
 }
 
 // Share my location
-document.getElementById('shareMyLocation').addEventListener('click', async () => {
-    if (GLOBALS?.current?.lat === undefined) {
-        await goToMyLocation();
-    }
+for (let button of document.getElementsByClassName("buttonShareMyLocation")) {
+    button.addEventListener('click', async () => {
+        if (GLOBALS?.current?.lat === undefined) {
+            await goToMyLocation();
+        }
 
-    GLOBALS.profiles.locationShareLink = window.location.href.split("?")[0] + '?lat=' + GLOBALS.current.lat + '&lng=' + GLOBALS.current.lng + '&zoom=' + GLOBALS.map.getZoom();
+        GLOBALS.profiles.locationShareLink = window.location.href.split("?")[0] + '?lat=' + GLOBALS.current.lat + '&lng=' + GLOBALS.current.lng + '&zoom=' + GLOBALS.map.getZoom();
 
-    navigator.clipboard.writeText(GLOBALS.profiles.locationShareLink).then(function() {
-        alert('Location sharing link copied to clipboard');
-    }, function(err) {
-        alert('Could not copy the link automatically to your clipboard. Here, copy it yourself: "' + GLOBALS.profiles.locationShareLink + '"');
+        navigator.clipboard.writeText(GLOBALS.profiles.locationShareLink).then(function () {
+            alert('Location sharing link copied to clipboard');
+        }, function (err) {
+            alert('Could not copy the link automatically to your clipboard. Here, copy it yourself: "' + GLOBALS.profiles.locationShareLink + '"');
+        });
     });
-})
+}
