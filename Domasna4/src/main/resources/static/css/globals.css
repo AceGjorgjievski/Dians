@@ -2,13 +2,13 @@
 @import "globals/form.css";
 @import "globals/footer.css";
 
-@import "globals/statuses.css";
 @import "globals/map.css";
 @import "globals/buttons.css";
 @import "globals/stars.css";
 @import "globals/popups.css";
 
 @import "globals/loader.css";
+@import "globals/statuses.css";
 
 body {
     margin: 0;
@@ -57,6 +57,7 @@ body {
 }
 
 .facilitiesListItemTemplate {
+    cursor: pointer;
     border-radius: 6px;
     background: #ffffff16;
     padding: 12px;

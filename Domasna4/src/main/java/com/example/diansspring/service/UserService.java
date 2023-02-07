@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     User findByUsername(String username);
     List<Facility> updateFavouritesList(String username, Long facilityId);
     List<Review> updateReviewsList(String username, Long facilityId, Integer review);
+    User update(String username, String niceName);
 }

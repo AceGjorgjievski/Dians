@@ -8,6 +8,8 @@ for (let button of document.getElementsByClassName("buttonGoToMyLocation")) {
 document.getElementById('filterByFacilityType').addEventListener('change', async () => {
     GLOBALS.profiles.filterByFacilityType = document.getElementById('filterByFacilityType').value;
 
+
+
     await drawMap();
 });
 

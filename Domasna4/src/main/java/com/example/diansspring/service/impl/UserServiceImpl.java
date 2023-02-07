@@ -119,4 +119,16 @@ public class UserServiceImpl implements UserService {
 
         return user.getReviews();
     }
+
+    @Override
+    public User update(String username, String niceName) {
+        User user = this.findByUsername(username);
+
+        if (!Objects.equals(user, null)) {
+            user.setNiceName(niceName);
+            user = this.userRepository.save(user);
+        }
+
+        return user;
+    }
 }

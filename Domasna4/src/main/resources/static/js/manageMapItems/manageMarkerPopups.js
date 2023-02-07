@@ -14,12 +14,12 @@ export function openPopup() {
     setTimeout(() => {
         if (GLOBALS.profiles.clickedFacility !== undefined) {
             GLOBALS.profiles.clickedFacility.options.marker.openPopup();
-            setPopupContent();
+            setFacilityInfoContent();
         }
     }, 10);
 }
 
-export function setPopupContent(options = {}) {
+export function setFacilityInfoContent(options = {}) {
     GLOBALS.facilityItemInfo = options;
 
     if (GLOBALS.facilityItemInfo.facility === undefined) GLOBALS.facilityItemInfo.facility = GLOBALS.profiles.clickedFacility;

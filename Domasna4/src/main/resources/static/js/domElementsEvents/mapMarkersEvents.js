@@ -19,7 +19,7 @@ export function addMarkerClickEvent(facility) {
     })
 }
 
-function clickMarker(facility) {
+export function clickMarker(facility) {
     GLOBALS.profiles.clickedFacility = facility;
 
     facility.options.marker.setIcon(GLOBALS.blueIcon);

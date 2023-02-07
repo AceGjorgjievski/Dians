@@ -6,8 +6,8 @@ import {
 import { createCircle, removeCircle } from "./manageMapItems/manageChosenDistanceCircle.js";
 import { drawRoute, removeRoute } from "./manageMapItems/manageDrawnRoute.js";
 import { goToMyLocationIfNeeded } from "./geolocation.js";
-import { addMarkerClickEvent, unclickMarker } from "./domElementsEvents/mapMarkersEvents.js";
-import { bindPopupsToMarkers, setPopupContent } from "./manageMapItems/manageMarkerPopups.js";
+import { addMarkerClickEvent, clickMarker, unclickMarker } from "./domElementsEvents/mapMarkersEvents.js";
+import { bindPopupsToMarkers, setFacilityInfoContent } from "./manageMapItems/manageMarkerPopups.js";
 
 export async function drawMap() {
     document.getElementById("loaderContainer").style.display = "flex";
@@ -16,7 +16,7 @@ export async function drawMap() {
 
     await drawFacilities();
 
-    drawSideFacilitiesList();
+    await drawSideFacilitiesList();
 
     await drawRequisites();
 
@@ -57,7 +57,7 @@ async function drawFacilities(options = {}) {
     bindPopupsToMarkers();
 }
 
-function drawSideFacilitiesList() {
+async function drawSideFacilitiesList() {
     let facilitiesSortedByRating = GLOBALS.facilities.sort((a, b) => b.reviewRatingsAverage - a.reviewRatingsAverage);
 
     if (GLOBALS.profiles.showFavouritesOnly) {
@@ -79,6 +79,14 @@ function drawSideFacilitiesList() {
     for (let i = 0; i < facilitiesSortedByRating.length; i++) {
         let current = facilitiesSortedByRating[i];
 
+        if (GLOBALS.profiles.filterByFacilityType !== "ALL_TYPES" && current.facilityType !== GLOBALS.profiles.filterByFacilityType) {
+            continue;
+        }
+
+        if (GLOBALS.profiles.distanceRadius !== 0 && !await checkIfInChosenDistanceRadius(current, GLOBALS.profiles.distanceRadius)) {
+            continue;
+        }
+
         let facilitiesListItem = document.createElement('div');
         parent.appendChild(facilitiesListItem);
 
@@ -90,12 +98,19 @@ function drawSideFacilitiesList() {
     for (let elem of document.getElementsByClassName("facilitiesListItemTemplate")) {
         const facilityId = elem.getAttribute("data-facility-id");
         if (facilityId !== null) {
-            setPopupContent({
+            setFacilityInfoContent({
                 facility: GLOBALS.facilities.filter(e => e.id.toString() === facilityId)[0],
                 classNamePrefix: "facilitiesListItem",
                 parent: elem
             })
         }
+
+        elem.addEventListener('click', async function() {
+            if (GLOBALS.facilities.filter(e => e.id === parseInt(facilityId))[0] !== undefined) {
+                GLOBALS.profiles.clickedFacility = GLOBALS.facilities.filter(e => e.id === parseInt(facilityId))[0];
+                await drawMap();
+            }
+        })
     }
 }
 
