@@ -9,6 +9,8 @@ async function getLocation() {
 }
 
 export async function goToMyLocation(options = {}) {
+    document.getElementById("loaderContainer").style.display = "flex";
+
     await getLocation()
         .then((position) => {
             if (GLOBALS?.current?.marker !== undefined) {
@@ -26,6 +28,8 @@ export async function goToMyLocation(options = {}) {
                 GLOBALS.map.panTo([GLOBALS.current.lat, GLOBALS.current.lng], {animate: true});
             }
         });
+
+    document.getElementById("loaderContainer").style.display = "none";
 }
 
 export async function goToMyLocationIfNeeded(options = {}) {

@@ -10,6 +10,8 @@ import { addMarkerClickEvent, unclickMarker } from "./domElementsEvents/mapMarke
 import { bindPopupsToMarkers, setPopupContent } from "./manageMapItems/manageMarkerPopups.js";
 
 export async function drawMap() {
+    document.getElementById("loaderContainer").style.display = "flex";
+
     setDefaultGlobalsProfile();
 
     await drawFacilities();
@@ -17,6 +19,8 @@ export async function drawMap() {
     drawSideFacilitiesList();
 
     await drawRequisites();
+
+    document.getElementById("loaderContainer").style.display = "none";
 }
 
 function setDefaultGlobalsProfile() {
