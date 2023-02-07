@@ -2,6 +2,12 @@
 @import "globals/form.css";
 @import "globals/footer.css";
 
+@import "globals/statuses.css";
+@import "globals/map.css";
+@import "globals/buttons.css";
+@import "globals/stars.css";
+@import "globals/popups.css";
+
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -11,151 +17,13 @@ body {
     box-sizing: border-box;
 }
 
-#eventsSelectionTable td{
-    text-align: center;
-    padding: 2% 5%;
-}
-
-.error {
-    color: red;
-}
-
-.success {
-    color: green;
-}
-
-#mapdiv {
-    height: 100vh;
-    margin-left: 300px;
-}
-
-.button--footer {
-    padding-inline: 40px;
-    padding-block: 12px;
-
-    border-radius: 6px;
-}
-
-.button--primary {
-    background-color: #161616 !important;
-    color: white !important;
-}
-
-.stars {
-    position: relative;
-    background: #161616;
-
-    border-radius: 6px;
-
-    width: fit-content;
-    margin-inline: auto;
-}
-
-.yellowStars, .whiteStars, .noReviewsYet {
-    display: flex;
-    gap: 6px;
-
-    padding-block: 6px;
-    padding-inline: 12px;
-    margin-inline: auto;
-}
-
-.yellowStars {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-}
-
-.whiteStars {
-    position: relative;
-    inset: 0;
-}
-
-.star {
-    overflow: hidden;
-}
-
-.star>div {
-    width: 20px;
-    height: 20px;
-    background: yellow;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-.whiteStar>div {
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    opacity: .4;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-.routePopup>div {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.customPopup p, .customPopup h2, .infoFacility p, .infoFacility h2 {
-    margin-block: 2px !important;
-}
-
-.infoFacility h2 {
-    font-size: 1.2rem;
-}
-
-.infoFacilityType {
-    text-align: center;
-    width: fit-content;
-    margin-inline: auto !important;
-    margin-top: .8rem !important;
-
-    font-size: 10px;
-
-    border-radius: 6px;
-
-    padding: 2px 8px;
-    background-color: #e6e6fa66;
-    color: black;
-}
-
-.infoFavouriteButton {
-    font-size: 24px;
-    color: #ff000033;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.infoFavouriteButton:hover {
-    color: #ff000088;
-}
-
-.favourited {
-    color: #ff0000;
-}
-
-.infoReviewButton {
-    font-size: 24px;
-    color: #ffc10766;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.infoReviewButton:hover {
-    color: #ffc107aa;
-}
-
-.reviewed {
-    color: #ffc107;
-}
-
 .facilitiesListFixedContainer {
     position: fixed;
     inset: 0 auto 0 0;
     width: 300px;
     background-color: #161616;
     color: white;
-    z-index: 450;
+    z-index: 1000;
 }
 
 @media (max-width: 540px) {
@@ -190,30 +58,4 @@ body {
     border-radius: 6px;
     background: #ffffff16;
     padding: 12px;
-}
-
-#buttonShowFavouritesOnly {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
-
-.iconShowFavouritesOnly {
-    font-size: 32px;
-    color: #ff000033;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-    border-radius: 50%;
-    padding: 12px;
-}
-
-.iconShowFavouritesOnly:hover {
-    color: #ff000088;
-    background-color: #ff000033;
-}
-
-.favouriteButtonActive {
-    color: #ff0000;
-    background-color: #ff000088;
 }

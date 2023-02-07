@@ -1,0 +1,15 @@
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.reviewed {
+    color: #ffc107;
+}
+
+.favourited {
+    color: #ff0000;
+}

@@ -10,3 +10,16 @@ document.getElementById('filterByFacilityType').addEventListener('change', async
 
     await drawMap();
 });
+
+for (let button of document.getElementsByClassName("buttonOpenMobileSideFacilities")) {
+    button.addEventListener('click', function() {
+        for (let elem of document.getElementsByClassName("facilitiesListFixedContainer")) {
+            if (elem.style.display === "none" || !elem.style.display) {
+                elem.style.display = "block";
+            }
+            else {
+                elem.style.display = "none";
+            }
+        }
+    });
+}
