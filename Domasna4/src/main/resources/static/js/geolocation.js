@@ -8,7 +8,7 @@ async function getLocation() {
     }
 }
 
-export async function goToMyLocation() {
+export async function goToMyLocation(options = {}) {
     await getLocation()
         .then((position) => {
             if (GLOBALS?.current?.marker !== undefined) {
@@ -22,13 +22,15 @@ export async function goToMyLocation() {
             }
             GLOBALS.current.marker.setIcon(GLOBALS.greenIcon);
 
-            GLOBALS.map.panTo([GLOBALS.current.lat, GLOBALS.current.lng], {animate: true});
+            if (options.panTo === undefined || options.panTo) {
+                GLOBALS.map.panTo([GLOBALS.current.lat, GLOBALS.current.lng], {animate: true});
+            }
         });
 }
 
-export async function goToMyLocationIfNeeded() {
+export async function goToMyLocationIfNeeded(options = {}) {
     if (GLOBALS?.current?.lat === undefined) {
-        await goToMyLocation();
+        await goToMyLocation(options);
     }
 }
 

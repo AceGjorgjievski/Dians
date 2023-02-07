@@ -2,7 +2,7 @@ import { goToMyLocationIfNeeded } from "../geolocation.js";
 import { drawMap } from "../drawMap.js";
 
 export async function drawRoute() {
-    await goToMyLocationIfNeeded()
+    await goToMyLocationIfNeeded({"panTo": false})
 
     if (GLOBALS.profiles.drawnRoute !== undefined) {
         GLOBALS.profiles.drawnRoute.remove();
