@@ -65,6 +65,13 @@ function drawSideFacilitiesList() {
         parent.firstChild.remove();
     }
 
+    if (GLOBALS.profiles.clickedFacility !== undefined) {
+        let clickedFacilityAsArr = facilitiesSortedByRating.filter(e => GLOBALS.profiles.clickedFacility.id === e.id);
+        let otherFacilities = facilitiesSortedByRating.filter(e => GLOBALS.profiles.clickedFacility.id !== e.id);
+
+        facilitiesSortedByRating = clickedFacilityAsArr.concat(otherFacilities);
+    }
+
     for (let i = 0; i < facilitiesSortedByRating.length; i++) {
         let current = facilitiesSortedByRating[i];
 
