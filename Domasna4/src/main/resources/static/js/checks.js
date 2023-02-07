@@ -13,6 +13,7 @@ export function checkIfFilterByFacilityTypeMatching(facility) {
 }
 
 export function checkIfRouteIsDrawnToAnotherFacility(facility) {
+    console.log(GLOBALS.profiles.doDrawRoute);
     if (GLOBALS.profiles.drawnRoute !== undefined && GLOBALS.profiles.clickedFacility !== facility) {
         return true;
     }

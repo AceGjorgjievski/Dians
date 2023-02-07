@@ -14,33 +14,37 @@ export async function drawRoute() {
 
     if (start[0] === undefined || end[0] === undefined) return;
 
-    $.ajax({
-        type: "GET",
-        url: "/routes/getData",
-        data: {
-            point1: start[0] + ',' + start[1],
-            point2: end[0] + ',' + end[1],
-        },
-        success: async function(strData) {
-            if (strData) {
-                let data = JSON.parse(strData);
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "GET",
+            url: "/routes/getData",
+            data: {
+                point1: start[0] + ',' + start[1],
+                point2: end[0] + ',' + end[1],
+            },
+            success: async function (strData) {
+                if (strData) {
+                    let data = JSON.parse(strData);
 
-                const coordinates = [];
-                data.paths[0].points.coordinates.forEach(coordinatesGroup => {
-                    coordinates.push([coordinatesGroup[1], coordinatesGroup[0]])
-                })
+                    const coordinates = [];
+                    data.paths[0].points.coordinates.forEach(coordinatesGroup => {
+                        coordinates.push([coordinatesGroup[1], coordinatesGroup[0]])
+                    })
 
-                GLOBALS.profiles.drawnRoute = L.polyline(coordinates, {color: 'green', weight: 6});
-                GLOBALS.profiles.drawnRoute.addTo(GLOBALS.map);
+                    GLOBALS.profiles.drawnRoute = L.polyline(coordinates, {color: 'green', weight: 6});
+                    GLOBALS.profiles.drawnRoute.addTo(GLOBALS.map);
 
-                bindPopupToRoute(data.paths[0].distance, data.paths[0].time);
+                    bindPopupToRoute(data.paths[0].distance, data.paths[0].time);
 
-                GLOBALS.profiles.doDrawRoute = true;
+                    GLOBALS.profiles.doDrawRoute = true;
+                    resolve();
+                }
+            },
+            fail: function (xhr, status, error) {
+                console.log(error);
+                reject(error);
             }
-        },
-        fail: function(xhr, status, error) {
-            console.log(error);
-        }
+        });
     });
 }
 

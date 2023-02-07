@@ -27,7 +27,7 @@ document.getElementById('buttonManageDrawRoute').addEventListener('click', async
         await drawRoute();
     }
     else {
-        removeRoute();
+        await removeRoute();
     }
 
     await drawMap();

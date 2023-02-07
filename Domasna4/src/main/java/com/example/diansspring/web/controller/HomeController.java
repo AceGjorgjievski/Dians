@@ -37,8 +37,6 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(@RequestParam(required = false) Float lat, @RequestParam(required = false) Float lng, @RequestParam(required = false) Float zoom, Model model) {
-        System.out.println(this.configurationService.getBaseUrl());
-
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
 
