@@ -39,7 +39,7 @@ public class HomeController {
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
 
-        if (this.facilityService.listAll().size() == 0) initializeFacilities();
+        if (this.facilityService.listAll().size() == 0) this.initializeFacilities();
 
         model.addAttribute("facilities", this.facilityService.listAll());
         model.addAttribute("facilityTypes", Arrays.stream(FacilityType.values()).map(FacilityType::name).collect(Collectors.toList()));

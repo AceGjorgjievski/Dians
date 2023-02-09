@@ -38,60 +38,83 @@ public class AdminController {
         return "master-template";
     }
 
+    /**
+     * This method is used for updating the facilities in the database.
+     * All the process is seperated in three different inner methods:
+     *      - this.getConnection();
+     *      - this.transformData(BufferedReader)
+     *      - this.insertDatabase(List<String> facilities)
+     *
+     * @return success if the process succeeds or error if the process fails ?
+     */
     @PostMapping("/update-facilities-in-database")
     public String updateFacilitiesInDatabase() {
-        URL urlObject;
+        BufferedReader bufferedReader;
+        List<String> facilitiesInputData;
+
         try {
-            urlObject = new URL("https://raw.githubusercontent.com/SimonAnastasov/Dians/main/Domasna1/output/output.txt");
-        } catch (MalformedURLException e) {
+            bufferedReader = this.getConnection();
+            facilitiesInputData = this.readingDataAndAddingDiscount(bufferedReader);
+            this.insertDataToDatabase(facilitiesInputData);
+        } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/admin?error";
         }
+        return "redirect:/admin?success";
+    }
+
+    /**
+     * This method is responsible for making connecting to GitHub raw file from out first homework
+     * where we filtered our facilities. After the connection is made, all the data is stored in
+     * BufferedReader object.
+     *
+     * @return new BufferedReader object with all the data needed for later manipulation.
+     * @throws IOException
+     */
+    private BufferedReader getConnection() throws IOException {
+        URL urlObject = new URL("https://raw.githubusercontent.com/SimonAnastasov/Dians/main/Domasna1/output/output.txt");
 
         HttpURLConnection connection;
-        try {
-            connection = (HttpURLConnection) urlObject.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/admin?error";
-        }
+        connection = (HttpURLConnection) urlObject.openConnection();
+        connection.setRequestMethod("GET");
 
-        try {
-            connection.setRequestMethod("GET");
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-            return "redirect:/admin?error";
-        }
+        return new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    }
 
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/admin?error";
-        }
+    //podobro ime na metodov?
 
-        List<String> facilitiesInputData = new ArrayList<>();
-
+    /**
+     * This method is responsible for reading the data from the given bufferedReader object
+     * and adding discount to every single facility.
+     *
+     * @param bufferedReader object with data needed for adding discount
+     * @return List<String> of the facilities with added discount
+     * @throws IOException
+     */
+    private List<String> readingDataAndAddingDiscount(BufferedReader bufferedReader) throws IOException {
         String inputLine = null;
-        try {
-            Random rand = new Random();
-            List<Integer> allowedRandoms = new ArrayList<>(Arrays.asList(0, 10, 15, 25));
-            while ((inputLine = bufferedReader.readLine()) != null) {
-                int discount = allowedRandoms.get(rand.nextInt(4));
-                facilitiesInputData.add(inputLine + ", " + discount);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "redirect:/admin?error";
+        List<String> inputData = new ArrayList<>();
+
+        Random rand = new Random();
+        List<Integer> allowedRandoms = new ArrayList<>(Arrays.asList(0, 10, 15, 25));
+        while ((inputLine = bufferedReader.readLine()) != null) {
+            int discount = allowedRandoms.get(rand.nextInt(4));
+            inputData.add(inputLine + ", " + discount);
         }
 
+        return inputData;
+    }
+
+    /**
+     * This method is used for transforming the facilities list of strings into Facilities objects
+     * done by java Streams.
+     * @param facilitiesInputData list of strings for later transforming the data into Facilities objects.
+     */
+    private void insertDataToDatabase(List<String> facilitiesInputData) {
         List<Facility> facilitiesList = facilitiesInputData.stream()
                 .skip(1)
                 .map(Facility::create).toList();
 
         facilitiesList.forEach(this.facilityService::save);
-
-        return "redirect:/admin?success";
     }
 }
