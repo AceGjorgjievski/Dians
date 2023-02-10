@@ -1,0 +1,28 @@
+.routePopup>div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.customPopup p, .customPopup h2, .infoFacility p, .infoFacility h2 {
+    margin-block: 2px !important;
+}
+
+.infoFacility h2 {
+    font-size: 1.2rem;
+}
+
+.infoFacilityType {
+    text-align: center;
+    width: fit-content;
+    margin-inline: auto !important;
+    margin-top: .8rem !important;
+
+    font-size: 10px;
+
+    border-radius: 6px;
+
+    padding: 2px 8px;
+    background-color: #e6e6fa66;
+    color: black;
+}

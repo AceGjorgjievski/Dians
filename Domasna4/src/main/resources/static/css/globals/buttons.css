@@ -1,0 +1,59 @@
+.button--footer {
+    padding-inline: 40px;
+    padding-block: 12px;
+
+    border-radius: 6px;
+}
+
+.button--primary {
+    background-color: #161616 !important;
+    color: white !important;
+}
+
+.infoFavouriteButton {
+    font-size: 24px;
+    color: #ff000033;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.infoFavouriteButton:hover {
+    color: #ff000088;
+}
+
+.infoReviewButton {
+    font-size: 24px;
+    color: #ffc10766;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.infoReviewButton:hover {
+    color: #ffc107aa;
+}
+
+#buttonShowFavouritesOnly {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.iconShowFavouritesOnly {
+    font-size: 32px;
+    color: #ff000033;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    border-radius: 50%;
+    padding: 12px;
+}
+
+.iconShowFavouritesOnly:hover {
+    color: #ff000088;
+    background-color: #ff000033;
+}
+
+.favouriteButtonActive {
+    color: #ff0000;
+    background-color: #ff000088;
+}

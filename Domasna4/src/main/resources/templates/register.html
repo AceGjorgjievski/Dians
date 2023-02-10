@@ -1,0 +1,53 @@
+<div class="center">
+    <form th:action="@{/register}" style="border:1px solid #ccc" th:method="POST">
+        <div class="container">
+            <h1>Register</h1>
+            <br/>
+
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <br/>
+
+            <label>
+                <b>Username</b>
+                <input type="text" placeholder="Username" name="username" required>
+            </label>
+
+            <label>
+                <b>Password</b>
+                <input type="password" placeholder="Password" name="password" required>
+            </label>
+
+            <label>
+                <b>Repeat Password</b>
+                <input type="password" placeholder="Repeat password" name="repeatPassword" required>
+            </label>
+
+            <label>
+                <b>Email</b>
+                <input type="email" placeholder="Email" name="email" required>
+            </label>
+
+            <label>
+                <b>Nice Name</b>
+                <input type="text" placeholder="Nice Name" name="niceName" required>
+            </label>
+
+            <div>
+                <img th:src="*{'data:realCaptcha/jpg;base64,'+ captchaDetailsUser.realCaptcha}" alt="The captcha to enter"/>
+            </div>
+
+            <input type="hidden" th:field="*{captchaDetailsUser.hiddenCaptcha}"/>
+            <br/>
+
+            <label>
+                <b>Enter Captcha</b>
+                <input type="text" th:field="*{captchaDetailsUser.captcha}" placeholder="Enter captcha"/>
+            </label>
+
+            <div class="clearfix">
+                <button type="submit" class="button" style="margin-bottom: 1.5rem;">Register</button>
+                <a href="/login">Already registered? Log in instead.</a>
+            </div>
+        </div>
+    </form>
+</div>

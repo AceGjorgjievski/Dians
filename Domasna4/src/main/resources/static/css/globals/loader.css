@@ -1,0 +1,16 @@
+.loaderContainer {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    background: #0006;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.loader {
+    color: white;
+}
