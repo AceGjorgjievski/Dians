@@ -45,7 +45,7 @@ public class AdminController {
      *      - this.transformData(BufferedReader)
      *      - this.insertDatabase(List<String> facilities)
      *
-     * @return success if the process succeeds or error if the process fails ?
+     * @return success if the process succeeds or error if the process fails.
      */
     @PostMapping("/update-facilities-in-database")
     public String updateFacilitiesInDatabase() {
@@ -53,12 +53,11 @@ public class AdminController {
         List<String> facilitiesInputData;
 
         try {
-            bufferedReader = this.getConnection();
-            facilitiesInputData = this.readingDataAndAddingDiscount(bufferedReader);
-            this.insertDataToDatabase(facilitiesInputData);
-
-            //this.insertDataToDatabase(this.readingDataAndAddingDiscount(this.getConnection()))
-            //decorator of methods? :P
+            // Decorator of methods
+            this.insertDataToDatabase(this.readingDataAndAddingDiscount(this.getConnection()));
+//            bufferedReader = this.getConnection();
+//            facilitiesInputData = this.readingDataAndAddingDiscount(bufferedReader);
+//            this.insertDataToDatabase(facilitiesInputData);
         } catch (IOException e) {
             e.printStackTrace();
             return "redirect:/admin?error";
@@ -83,8 +82,6 @@ public class AdminController {
 
         return new BufferedReader(new InputStreamReader(connection.getInputStream()));
     }
-
-    //podobro ime na metodov?
 
     /**
      * This method is responsible for reading the data from the given bufferedReader object

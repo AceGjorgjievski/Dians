@@ -40,7 +40,8 @@ public class HomeController {
         model.addAttribute("pageTitle", "Home - Findify");
         model.addAttribute("mainBodyContent", "home");
 
-        if (this.facilityService.listAll().size() == 0) initializeFacilities();
+//        Now /admin is restricted, admin must initialize facilities;
+//        if (this.facilityService.listAll().size() == 0) initializeFacilities();
 
         model.addAttribute("facilities", this.facilityService.listAll());
         model.addAttribute("facilityTypes", Arrays.stream(FacilityType.values()).map(FacilityType::name).collect(Collectors.toList()));
@@ -56,17 +57,17 @@ public class HomeController {
         return "master-template";
     }
 
-    private void initializeFacilities() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
-
-        ResponseEntity<String> response = new RestTemplate().exchange(
-            this.configurationService.getBaseUrl() + "/admin/update-facilities-in-database",
-            HttpMethod.POST,
-            requestEntity,
-            String.class
-        );
-    }
+//    private void initializeFacilities() {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//
+//        HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+//
+//        ResponseEntity<String> response = new RestTemplate().exchange(
+//            this.configurationService.getBaseUrl() + "/admin/update-facilities-in-database",
+//            HttpMethod.POST,
+//            requestEntity,
+//            String.class
+//        );
+//    }
 }
