@@ -1,13 +1,14 @@
-FROM maven:3.8.3-openjdk-17 AS build
+# Use an openjdk image as the base image
+FROM openjdk:21-jdk-oracle
 
-COPY src /src
-COPY pom.xml .
+# Set the working directory in the image
+WORKDIR /app
 
-RUN mvn clean package
+# Copy the jar file of the application to the image
+COPY target/*.jar app.jar
 
+# Expose port 9091 to the host
+EXPOSE 9091
 
-FROM tomcat:9
-
-COPY --from=0 ./target/application.war /usr/local/tomcat/webapps/application.war
-
-CMD ["catalina.sh", "run"]
+# Set the command to run the application when the container starts
+CMD ["java", "-jar", "app.jar"]
