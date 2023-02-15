@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title th:text="${pageTitle}">Findify</title>
+
+        <link rel="stylesheet" href="font-awesome/css/all.css"/>
+        <link rel="stylesheet" href="css/globals.css"/>
+        <link th:if="${mainCssFile != null}" rel="stylesheet" th:href="${'css/' + mainCssFile}"/>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+              integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+              crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+                integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+                crossorigin=""></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    </head>
+
+    <body>
+
+        <header th:replace="fragments/header"></header>
+
+        <th:block th:if="${mainBodyContent == 'home'}">
+            <footer th:replace="fragments/footer"></footer>
+        </th:block>
+
+        <section style="margin-top: 100px;" th:include="${mainBodyContent}"></section>
+
+    </body>
+</html>

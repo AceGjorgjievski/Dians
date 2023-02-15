@@ -40,10 +40,12 @@ replay_pid*
 
 .idea
 Domasna2/dians-spring.iml
-Domasna3/dians-spring.iml
+Domasna3/dians-spring (1).iml
+Domasna4/dians-spring (2).iml
 
 Domasna2/target
 Domasna3/target
+Domasna4/target
 
 # User-specific stuff
 .idea/**/workspace.xml

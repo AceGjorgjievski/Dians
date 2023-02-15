@@ -1,0 +1,59 @@
+<header class="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="display: flex; align-items: center;">
+            <a href="/home" class="logo" style="display: block; aspect-ratio: 1; padding: 0;">
+                <img src="images/logo-black.jpg" alt="Findify logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"/>
+            </a>
+            <a href="/home" class="logo-text">FINDIFY</a>
+        </div>
+
+        <div class="header-right" style="display: flex; align-items: center;">
+            <th:block th:if="${facilityTypes != undefined}">
+                <label>
+                    <select id="filterByFacilityType" style="margin-right: 6px; padding: 2px; border-radius: 6px;">
+                        <option value="ALL_TYPES">ALL TYPES</option>
+                        <th:block th:each="facilityType : ${facilityTypes}">
+                            <option th:value="${facilityType}" th:text="${facilityType.replaceAll('_', ' ')}"></option>
+                        </th:block>
+                    </select>
+                </label>
+            </th:block>
+
+            <div class="hideOnMobile" style="display: flex; align-items: center;">
+                <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
+
+                <th:block th:if="${mainBodyContent == 'home'}">
+                    <a class="buttonGoToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
+                    <a class="buttonShareMyLocation" style="cursor: pointer;"><i class="fas fa-location-arrow"></i></a>
+                </th:block>
+
+                <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+                <a sec:authorize="isAuthenticated()" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+
+                <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"><i class="fas fa-user-shield"></i></a>
+
+                <a sec:authorize="!isAuthenticated()" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hideOnDesktop headerIcons" style="display: flex; align-items: center; justify-content: center">
+        <th:block th:if="${mainBodyContent == 'home'}">
+            <a class="buttonOpenMobileSideFacilities" style="cursor: pointer;"><i class="fa-solid fa-bars"></i></a>
+        </th:block>
+
+        <a href="/home"><i class="fa fa-solid fa-house tm-brand-icon"></i></a>
+
+        <th:block th:if="${mainBodyContent == 'home'}">
+            <a class="buttonGoToMyLocation" style="cursor: pointer;"><i class="fa-solid fa-bullseye"></i></a>
+            <a class="buttonShareMyLocation" style="cursor: pointer;"><i class="fas fa-location-arrow"></i></a>
+        </th:block>
+
+        <a sec:authorize="isAuthenticated()" href="/profile"><i class="fa fa-solid fa-pen tm-brand-icon"></i></a>
+        <a sec:authorize="isAuthenticated()" href="/logout"><i class="fas fa-sign-out-alt"></i></a>
+
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin"><i class="fas fa-user-shield"></i></a>
+
+        <a sec:authorize="!isAuthenticated()" href="/login"><i class="fas fa-sign-in-alt"></i></a>
+    </div>
+</header>

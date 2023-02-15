@@ -1,0 +1,22 @@
+<div class="center">
+    <form th:action="@{'/profile/save'}" style="border:1px solid #ccc" th:method="POST">
+        <div class="container">
+            <h1>My Account</h1>
+            <br/>
+
+            <div class="error" th:if="${param.error != null}" th:text="${param.error}"></div>
+            <br/>
+
+            <input type="hidden" placeholder="Username" name="username" th:value="${currentUserUsername != null ? currentUserUsername : '/'}">
+
+            <label>
+                <b>Nice Name</b>
+                <input type="text" placeholder="Nice Name" name="niceName" th:value="${currentUserNiceName != null ? currentUserNiceName : '/'}">
+            </label>
+
+            <div class="clearfix">
+                <button class="button" style="margin-bottom: 1.5rem;">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</div>

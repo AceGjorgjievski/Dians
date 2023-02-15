@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  findifyapp:
+#    image: findifyapp.azurecr.io/findifyapp:findifyapp
+    build:
+      context: .
+      dockerfile: docker_spring.Dockerfile
+    ports:
+      - "9091:9091"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://findifydb:5432/findify_db
+      SPRING_DATASOURCE_USERNAME: findify
+      SPRING_DATASOURCE_PASSWORD: findify
+  findifydb:
+#    image: findifyapp.azurecr.io/findifyapp:findifydb
+    image: postgres:12.2
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: findify_db
+      POSTGRES_USER: findify
+      POSTGRES_PASSWORD: findify
+#    volumes:
+#      - mydata:/mount/findifyvolumes
+
+volumes:
+  pgdata:
+
+#volumes:
+#  mydata:
+#    driver: azure_file
+#    driver_opts:
+#      share_name: findifyfileshare
+#      storage_account_name: findifystorageaccount
